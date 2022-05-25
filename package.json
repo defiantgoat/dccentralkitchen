@@ -1,9 +1,8 @@
 {
-  "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+    "start": "expo start --dev-client",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
     "web": "expo start --web",
     "eject": "expo eject",
     "test": "jest --watchAll",
@@ -52,6 +51,8 @@
   },
   "dependencies": {
     "@babel/core": "^7.12.9",
+    "@babel/plugin-transform-react-jsx": "^7.17.12",
+    "@babel/preset-typescript": "^7.17.12",
     "@expo/samples": "~3.0.3",
     "@expo/vector-icons": "^12.0.0",
     "@react-native-async-storage/async-storage": "^1.16.3",
@@ -65,7 +66,7 @@
     "@sentry/react-native": "^3.2.11",
     "@unimodules/core": "~7.2.0",
     "airtable": "^0.11.1",
-    "expo": "^44.0.0",
+    "expo": "^45.0.0",
     "expo-app-loading": "~1.3.0",
     "expo-application": "~4.0.1",
     "expo-asset": "~8.4.6",
@@ -97,14 +98,15 @@
     "isomorphic-fetch": "^3.0.0",
     "libphonenumber-js": "^1.7.52",
     "lodash": "^4.17.20",
+    "metro-react-native-babel-preset": "^0.70.3",
     "moment": "^2.29.1",
     "npm": "^6.14.6",
     "prop-types": "^15.0",
-    "react": "17.0.1",
+    "react": "17.0.2",
     "react-dom": "17.0.1",
     "react-geocode": "^0.2.0",
     "react-is": "^16.12.0",
-    "react-native": "0.64.3",
+    "react-native": "0.68.2",
     "react-native-alert-async": "^1.0.5",
     "react-native-autoheight-webview": "^1.5.1",
     "react-native-elements": "^3.4.1",
@@ -116,7 +118,7 @@
     "react-native-materialui-textfield": "^0.13.2",
     "react-native-paper": "^4.5.0",
     "react-native-phone-input": "^0.2.4",
-    "react-native-reanimated": "~2.3.1",
+    "react-native-reanimated": "^2.8.0",
     "react-native-safe-area-context": "3.3.2",
     "react-native-screens": "~3.10.1",
     "react-native-smooth-pincode-input": "^1.0.9",
@@ -132,9 +134,10 @@
     "validate.js": "^0.13.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.12.9",
     "airtable-schema-generator": "^1.3.4",
     "babel-eslint": "^10.0.3",
-    "babel-preset-expo": "9.0.1",
+    "babel-preset-expo": "~9.1.0",
     "eslint": "^5.16.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.9.0",
@@ -145,7 +148,7 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-react-native": "^3.8.1",
     "husky": "^7.0.0",
-    "jest-expo": "^44.0.0",
+    "jest-expo": "^45.0.0",
     "lint-staged": "^10.0.6",
     "prettier": "^1.18.2",
     "pretty-quick": "^3.1.3",
@@ -158,5 +161,7 @@
   "private": true,
   "peerDependencies": {
     "@unimodules/core": "^5.1.2"
-  }
+  },
+  "name": "dccentralkitchen",
+  "version": "1.0.0"
 }
