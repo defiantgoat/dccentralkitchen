@@ -146,6 +146,7 @@ export default function MapScreen(props) {
   };
 
   // Once stores are loaded, set an initial store to focus on
+  console.log(stores);
   if (!currentStore && locationPermissions && stores.length > 0) {
     if (showDefaultStore) {
       const { defaultStore } = findDefaultStore(stores);
