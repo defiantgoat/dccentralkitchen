@@ -1,4 +1,5 @@
 import { FontAwesome5 } from '@expo/vector-icons';
+import * as Sentry from '@sentry/react-native';
 import AppLoading from 'expo-app-loading';
 import { Asset } from 'expo-asset';
 import * as Analytics from 'expo-firebase-analytics';
@@ -8,7 +9,6 @@ import React, { useState } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import * as Sentry from 'sentry-expo';
 import Colors from './constants/Colors';
 import { env } from './environment';
 import { logErrorToSentry } from './lib/logUtils';
@@ -19,6 +19,7 @@ Sentry.init({
   enableInExpoDevelopment: false,
   debug: false,
   environment: env,
+  enableNative: false,
 });
 
 export default function App(props) {
