@@ -3,7 +3,7 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import { useFocusEffect } from '@react-navigation/native';
 import * as Analytics from 'expo-firebase-analytics';
 import PropTypes from 'prop-types';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { ActivityIndicator, PixelRatio, StyleSheet, View } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import BottomSheet from 'reanimated-bottom-sheet';
@@ -23,10 +23,8 @@ import { deltas, initialRegion } from '../../constants/Map';
 import { getAsyncCustomerAuth } from '../../lib/authUtils';
 import {
   findDefaultStore,
-  findStoreDistance,
   getAsyncStorageMapFilters,
   setInitialAsyncStorageMapFilters,
-  sortByDistance,
   useCurrentLocation,
   useStoreProducts,
   useStores,
@@ -45,24 +43,17 @@ export default function MapScreen(props) {
   const [currentStore, setCurrentStore] = useState(null);
   const [mapFilterObj, setMapFilterObj] = useState();
   const [filteredStores, setFilteredStores] = useState([]);
+  const [showDefaultStore, setDefaultStore] = useState(false);
 
   const storeProducts = useStoreProducts(currentStore);
   const { locationPermissions, currentLocation } = useCurrentLocation();
 
-  const stores = useStores();
+  const stores = useStores(currentLocation);
 
-  stores.forEach((store) => {
-    const currStore = store;
-    currStore.distance = findStoreDistance(currentLocation, store);
-  });
-  stores.sort((a, b) => sortByDistance(a, b));
+  // console.log(stores);
 
   const bottomSheetRef = useRef(null);
   const mapRef = useRef(null);
-
-  const showDefaultStore =
-    locationPermissions !== 'granted' ||
-    (stores.length > 0 && !stores[0].distance);
 
   useFocusEffect(
     useCallback(() => {
@@ -78,15 +69,35 @@ export default function MapScreen(props) {
     }, [])
   );
 
-  useEffect(() => {
-    if (props.route.params) {
-      const store = props.route.params.currentStore;
-      changeCurrentStore(store, true, false);
-    }
-  }, [props.route.params]);
+  // useEffect(() => {
+  //   if (props.route.params) {
+  //     const store = props.route.params.currentStore;
+  //     changeCurrentStore(store, true, false);
+  //   }
+  // }, [props.route.params]);
 
   useEffect(() => {
-    if (mapFilterObj && stores.length) {
+    if (!stores.length) return;
+    if (!currentStore && locationPermissions) {
+      setDefaultStore(
+        locationPermissions !== 'granted' &&
+          (stores.length > 0 || !stores[0].distance)
+      );
+      if (
+        locationPermissions !== 'granted' &&
+        (stores.length > 0 || !stores[0].distance)
+      ) {
+        console.log('if');
+        const { defaultStore } = findDefaultStore(stores);
+        changeCurrentStore(defaultStore, false, false);
+        return;
+      } else {
+        // console.log('first store', stores[0]);
+        console.log('else');
+        changeCurrentStore(stores[0], true, true);
+        return;
+      }
+    } else if (mapFilterObj) {
       let filteredStoresCopy;
       if (mapFilterObj.wic && !mapFilterObj.couponProgramPartner) {
         filteredStoresCopy = stores.filter((store) => store.wic);
@@ -103,9 +114,12 @@ export default function MapScreen(props) {
       }
       setFilteredStores(filteredStoresCopy);
 
+      console.log('changeCurrentStore');
+      console.log(mapFilterObj);
       changeCurrentStore(filteredStoresCopy[0], true, false);
     }
   }, [mapFilterObj, stores]);
+
   useEffect(() => {
     const fetchUser = async () => {
       const customerId = await getAsyncCustomerAuth();
@@ -146,15 +160,20 @@ export default function MapScreen(props) {
     }
   };
 
-  // Once stores are loaded, set an initial store to focus on
-  if (!currentStore && locationPermissions && stores.length > 0) {
-    if (showDefaultStore) {
-      const { defaultStore } = findDefaultStore(stores);
-      changeCurrentStore(defaultStore, false, false);
-    } else {
-      changeCurrentStore(stores[0], false, false);
-    }
-  }
+  // useEffect(() => {
+  //   // Once stores are loaded, set an initial store to focus on
+  //   if (!currentStore && locationPermissions && stores.length > 0) {
+  //     if (!showDefaultStore) {
+  //       console.log('if');
+  //       const { defaultStore } = findDefaultStore(stores);
+  //       changeCurrentStore(defaultStore, false, false);
+  //     } else {
+  //       // console.log('first store', stores[0]);
+  //       console.log('else');
+  //       changeCurrentStore(stores[0], true, true);
+  //     }
+  //   }
+  // }, [showDefaultStore]);
 
   const renderContent = () => {
     return (
