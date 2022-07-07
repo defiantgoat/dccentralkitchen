@@ -1,14 +1,13 @@
 import { FontAwesome5 } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
-import React from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import Window from '../../constants/Layout';
 import {
   NavButtonContainer,
   NavHeaderContainer,
   NavTitle,
 } from '../../components/BaseComponents';
+import Window from '../../constants/Layout';
 import { IconContainer } from '../../styled/resources';
 
 const Recipe = (props) => {
@@ -34,7 +33,9 @@ const Recipe = (props) => {
               alt={`${item.title}`}
             />
           </IconContainer>
+          <NavTitle style={styles.subHeading}>Ingredients</NavTitle>
           <Text style={styles.textContainer}>{item.ingredients}</Text>
+          <NavTitle style={styles.subHeading}>Instructions</NavTitle>
           <Text style={styles.textContainer}>{item.instructions}</Text>
         </ScrollView>
       </View>
@@ -64,6 +65,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 30,
   },
+  subHeading: {
+    textAlign: 'center',
+    width: '100%',
+    fontSize: 20,
+  },
   bigPicture: {
     marginVertical: 20,
     alignItems: 'center',
@@ -75,7 +81,7 @@ const styles = StyleSheet.create({
     height: 58,
   },
   textContainer: {
-    margin: 20,
+    margin: 30,
   },
 });
 
