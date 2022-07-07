@@ -208,7 +208,7 @@ export default function SettingsScreen(props) {
             <ButtonContainer
               style={{ marginTop: 8 }}
               onPress={() =>
-                WebBrowser.openBrowserAsync('https://calblueprint.org')
+                WebBrowser.openBrowserAsync('https://blueraster.com')
               }>
               <Body>Click here to learn more at calblueprint.org</Body>
             </ButtonContainer>
