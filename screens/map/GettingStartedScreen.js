@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { Checkbox } from 'react-native-paper';
-import bannerLogo from '../../assets/images/banner_logo.png';
+import iconTrans from '../../assets/images/icon_trans.png';
 import {
   ButtonLabel,
   FilledButtonContainer,
@@ -32,34 +32,27 @@ export default function GettingStartedScreen({ route, navigation }) {
   }
 
   return (
-    <View style={{ flex: 1 }}>
+    <View
+      style={{
+        flex: 1,
+      }}>
       <NavHeaderContainer
         vertical
         noShadow
-        backgroundColor={Colors.primaryGreen}
+        // backgroundColor={Colors.primaryGreen}
         paddingTop={0}
         alignItems="center"
         justifyContent="space-between"
         height={Window.height * (12 / 100)}>
-        <DragBar style={{ backgroundColor: Colors.lightText }} />
+        <DragBar style={{ backgroundColor: 'black' }} />
         <Image
-          source={bannerLogo}
+          source={iconTrans}
           resizeMode="contain"
           style={{
-            height: '40%',
+            height: '100%',
             width: '100%',
           }}
         />
-        <Text
-          style={{
-            textAlign: 'center',
-            color: Colors.lightText,
-
-            marginBottom: '1.5%',
-          }}>
-          DC Central Kitchen partners with corner stores across D.C. to bring
-          affordable, fresh produce close to home.
-        </Text>
       </NavHeaderContainer>
       <View
         style={{
@@ -125,8 +118,21 @@ export default function GettingStartedScreen({ route, navigation }) {
               </Subtitle>
             </ColumnContainer>
           </HowItWorksContainer>
+          <HowItWorksContainer>
+            <Text
+              style={{
+                height: '50%',
+                width: '100%',
+                paddingRight: '10%',
+                paddingLeft: '10%',
+                textAlign: 'center',
+                color: 'black',
+              }}>
+              DC Central Kitchen partners with corner stores across D.C. to
+              bring affordable, fresh produce close to home.
+            </Text>
+          </HowItWorksContainer>
         </View>
-
         <View style={styles.checkboxContainer}>
           <Checkbox.Android
             status={checked ? 'checked' : 'unchecked'}
