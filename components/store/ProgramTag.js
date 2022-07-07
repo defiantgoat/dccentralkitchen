@@ -1,6 +1,5 @@
 import { FontAwesome5 } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
-import React from 'react';
 import { PixelRatio } from 'react-native';
 import { Chip } from 'react-native-paper';
 import Colors from '../../constants/Colors';
@@ -56,7 +55,7 @@ function ProgramTag({ program, tag = false, selected = false, selectedFunc }) {
 
   const labelToIcon = {
     'SNAP/EBT': 'credit-card',
-    WIC: 'heart',
+    'WIC': '',
     'SNAP Match': 'carrot',
     'Healthy Rewards': 'star',
     'Open now': 'clock',
