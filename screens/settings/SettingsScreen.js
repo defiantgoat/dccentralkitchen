@@ -191,11 +191,11 @@ export default function SettingsScreen(props) {
           <CategoryBar title="About" />
           <View style={{ padding: 24 }}>
             <Image
-              source={require('../../assets/images/blueprint-logo.png')}
+              source={require('../../assets/images/blue-raster-banner.png')}
               style={{
                 maxWidth: '50%',
                 resizeMode: 'contain',
-                height: 50,
+                height: 90,
                 marginBottom: 4,
               }}
             />
