@@ -77,6 +77,13 @@ export default function MapScreen(props) {
   // }, [props.route.params]);
 
   useEffect(() => {
+    // check for location permissions
+    // check for stores
+    // update store distances
+    // sort by distance
+    // check for user default store
+    // if default store go to store
+    // else go to closest store
     if (!stores.length) return;
     if (!currentStore && locationPermissions) {
       setDefaultStore(
