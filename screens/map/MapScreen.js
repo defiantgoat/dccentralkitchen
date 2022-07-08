@@ -23,8 +23,10 @@ import { deltas, initialRegion } from '../../constants/Map';
 import { getAsyncCustomerAuth } from '../../lib/authUtils';
 import {
   findDefaultStore,
+  findStoreDistance,
   getAsyncStorageMapFilters,
   setInitialAsyncStorageMapFilters,
+  sortByDistance,
   useCurrentLocation,
   useStoreProducts,
   useStores,
@@ -43,17 +45,26 @@ export default function MapScreen(props) {
   const [currentStore, setCurrentStore] = useState(null);
   const [mapFilterObj, setMapFilterObj] = useState();
   const [filteredStores, setFilteredStores] = useState([]);
-  const [showDefaultStore, setDefaultStore] = useState(false);
 
   const storeProducts = useStoreProducts(currentStore);
   const { locationPermissions, currentLocation } = useCurrentLocation();
 
-  const stores = useStores(currentLocation);
+  // check for stores > update store distances
+  const stores = useStores();
 
-  // console.log(stores);
+  // sort by distance
+  stores.forEach((store) => {
+    const currStore = store;
+    currStore.distance = findStoreDistance(currentLocation, store);
+  });
+  stores.sort((a, b) => sortByDistance(a, b));
 
   const bottomSheetRef = useRef(null);
   const mapRef = useRef(null);
+
+  const showDefaultStore =
+    locationPermissions !== 'granted' ||
+    (stores.length > 0 && !stores[0].distance);
 
   useFocusEffect(
     useCallback(() => {
@@ -69,38 +80,32 @@ export default function MapScreen(props) {
     }, [])
   );
 
-  // useEffect(() => {
-  //   if (props.route.params) {
-  //     const store = props.route.params.currentStore;
-  //     changeCurrentStore(store, true, false);
-  //   }
-  // }, [props.route.params]);
+  useEffect(() => {
+    if (props.route.params) {
+      const store = props.route.params.currentStore;
+      changeCurrentStore(store, true, false);
+    }
+  }, [props.route.params]);
 
   useEffect(() => {
-    // check for location permissions
-    // check for stores
-    // update store distances
-    // sort by distance
-    // check for user default store
     // if default store go to store
     // else go to closest store
     if (!stores.length) return;
-    if (!currentStore && locationPermissions) {
-      setDefaultStore(
-        locationPermissions !== 'granted' &&
-          (stores.length > 0 || !stores[0].distance)
-      );
-      if (
-        locationPermissions !== 'granted' &&
-        (stores.length > 0 || !stores[0].distance)
-      ) {
-        console.log('if');
+
+    // check for location permissions
+    const locationAccess = locationPermissions === 'granted';
+
+    // check for user default store
+    if (!currentStore && locationAccess) {
+      const hasDefaultStore = stores.length > 0 || !stores[0].distance;
+
+      setDefaultStore(hasDefaultStore);
+
+      if (hasDefaultStore) {
         const { defaultStore } = findDefaultStore(stores);
         changeCurrentStore(defaultStore, false, false);
         return;
       } else {
-        // console.log('first store', stores[0]);
-        console.log('else');
         changeCurrentStore(stores[0], true, true);
         return;
       }
@@ -120,9 +125,6 @@ export default function MapScreen(props) {
         filteredStoresCopy = stores;
       }
       setFilteredStores(filteredStoresCopy);
-
-      console.log('changeCurrentStore');
-      console.log(mapFilterObj);
       changeCurrentStore(filteredStoresCopy[0], true, false);
     }
   }, [mapFilterObj, stores]);
@@ -131,7 +133,7 @@ export default function MapScreen(props) {
     const fetchUser = async () => {
       const customerId = await getAsyncCustomerAuth();
       if (customerId.showLandingScreen) {
-        // console.log(customerId);
+        
         props.navigation.navigate('GettingStartedOverlay', { customerId });
       }
     };
@@ -167,20 +169,15 @@ export default function MapScreen(props) {
     }
   };
 
-  // useEffect(() => {
-  //   // Once stores are loaded, set an initial store to focus on
-  //   if (!currentStore && locationPermissions && stores.length > 0) {
-  //     if (!showDefaultStore) {
-  //       console.log('if');
-  //       const { defaultStore } = findDefaultStore(stores);
-  //       changeCurrentStore(defaultStore, false, false);
-  //     } else {
-  //       // console.log('first store', stores[0]);
-  //       console.log('else');
-  //       changeCurrentStore(stores[0], true, true);
-  //     }
-  //   }
-  // }, [showDefaultStore]);
+  // Once stores are loaded, set an initial store to focus on
+  if (!currentStore && locationPermissions && stores.length > 0) {
+    if (showDefaultStore) {
+      const { defaultStore } = findDefaultStore(stores);
+      changeCurrentStore(defaultStore, false, false);
+    } else {
+      changeCurrentStore(stores[0], false, false);
+    }
+  }
 
   const renderContent = () => {
     return (
