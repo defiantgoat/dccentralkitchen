@@ -39,7 +39,6 @@ import {
 } from '../../styled/store';
 
 const snapPoints = [185, 325, 488];
-
 export default function MapScreen(props) {
   const [region, setRegion] = useState(initialRegion);
   const [currentStore, setCurrentStore] = useState(null);
@@ -117,8 +116,6 @@ export default function MapScreen(props) {
     if (!currentStore && locationAccess) {
       const hasDefaultStore = stores.length > 0 || !stores[0].distance;
 
-      setDefaultStore(hasDefaultStore);
-
       if (hasDefaultStore) {
         const { defaultStore } = findDefaultStore(stores);
         changeCurrentStore(defaultStore, false, false);
@@ -126,7 +123,7 @@ export default function MapScreen(props) {
         changeCurrentStore(stores[0], true, true);
       }
     }
-  }, [mapFilterObj, stores]);
+  }, [mapFilterObj, stores]); // eslint-disable-line
 
   useEffect(() => {
     const fetchUser = async () => {
