@@ -39,7 +39,6 @@ export default function GettingStartedScreen({ route, navigation }) {
       <NavHeaderContainer
         vertical
         noShadow
-        // backgroundColor={Colors.primaryGreen}
         paddingTop={0}
         alignItems="center"
         justifyContent="space-between"
