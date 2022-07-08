@@ -96,20 +96,7 @@ export default function MapScreen(props) {
     const locationAccess = locationPermissions === 'granted';
 
     // check for user default store
-    if (!currentStore && locationAccess) {
-      const hasDefaultStore = stores.length > 0 || !stores[0].distance;
-
-      setDefaultStore(hasDefaultStore);
-
-      if (hasDefaultStore) {
-        const { defaultStore } = findDefaultStore(stores);
-        changeCurrentStore(defaultStore, false, false);
-        return;
-      } else {
-        changeCurrentStore(stores[0], true, true);
-        return;
-      }
-    } else if (mapFilterObj) {
+    if (mapFilterObj) {
       let filteredStoresCopy;
       if (mapFilterObj.wic && !mapFilterObj.couponProgramPartner) {
         filteredStoresCopy = stores.filter((store) => store.wic);
@@ -126,6 +113,18 @@ export default function MapScreen(props) {
       }
       setFilteredStores(filteredStoresCopy);
       changeCurrentStore(filteredStoresCopy[0], true, false);
+    }
+    if (!currentStore && locationAccess) {
+      const hasDefaultStore = stores.length > 0 || !stores[0].distance;
+
+      setDefaultStore(hasDefaultStore);
+
+      if (hasDefaultStore) {
+        const { defaultStore } = findDefaultStore(stores);
+        changeCurrentStore(defaultStore, false, false);
+      } else {
+        changeCurrentStore(stores[0], true, true);
+      }
     }
   }, [mapFilterObj, stores]);
 
