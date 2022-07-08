@@ -3,7 +3,7 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import { useFocusEffect } from '@react-navigation/native';
 import * as Analytics from 'expo-firebase-analytics';
 import PropTypes from 'prop-types';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { ActivityIndicator, PixelRatio, StyleSheet, View } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import BottomSheet from 'reanimated-bottom-sheet';
@@ -39,7 +39,6 @@ import {
 } from '../../styled/store';
 
 const snapPoints = [185, 325, 488];
-
 export default function MapScreen(props) {
   const [region, setRegion] = useState(initialRegion);
   const [currentStore, setCurrentStore] = useState(null);
@@ -49,8 +48,10 @@ export default function MapScreen(props) {
   const storeProducts = useStoreProducts(currentStore);
   const { locationPermissions, currentLocation } = useCurrentLocation();
 
+  // check for stores > update store distances
   const stores = useStores();
 
+  // sort by distance
   stores.forEach((store) => {
     const currStore = store;
     currStore.distance = findStoreDistance(currentLocation, store);
@@ -86,7 +87,15 @@ export default function MapScreen(props) {
   }, [props.route.params]);
 
   useEffect(() => {
-    if (mapFilterObj && stores.length) {
+    // if default store go to store
+    // else go to closest store
+    if (!stores.length) return;
+
+    // check for location permissions
+    const locationAccess = locationPermissions === 'granted';
+
+    // check for user default store
+    if (mapFilterObj) {
       let filteredStoresCopy;
       if (mapFilterObj.wic && !mapFilterObj.couponProgramPartner) {
         filteredStoresCopy = stores.filter((store) => store.wic);
@@ -102,15 +111,24 @@ export default function MapScreen(props) {
         filteredStoresCopy = stores;
       }
       setFilteredStores(filteredStoresCopy);
-
       changeCurrentStore(filteredStoresCopy[0], true, false);
     }
-  }, [mapFilterObj, stores]);
+    if (!currentStore && locationAccess) {
+      const hasDefaultStore = stores.length > 0 || !stores[0].distance;
+
+      if (hasDefaultStore) {
+        const { defaultStore } = findDefaultStore(stores);
+        changeCurrentStore(defaultStore, false, false);
+      } else {
+        changeCurrentStore(stores[0], true, true);
+      }
+    }
+  }, [mapFilterObj, stores]); // eslint-disable-line
+
   useEffect(() => {
     const fetchUser = async () => {
       const customerId = await getAsyncCustomerAuth();
       if (customerId.showLandingScreen) {
-        // console.log(customerId);
         props.navigation.navigate('GettingStartedOverlay', { customerId });
       }
     };
