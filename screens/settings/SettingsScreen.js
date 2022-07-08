@@ -210,7 +210,7 @@ export default function SettingsScreen(props) {
               onPress={() =>
                 WebBrowser.openBrowserAsync('https://blueraster.com')
               }>
-              <Body>Click here to learn more at calblueprint.org</Body>
+              <Body>Click here to learn more at blueraster.com</Body>
             </ButtonContainer>
           </View>
           <CategoryBar title="Exit" />
