@@ -199,12 +199,12 @@ export default function SettingsScreen(props) {
                 marginBottom: 4,
               }}
             />
-            <Body>
+            {/* <Body>
               This app was designed and developed by Blueprint, Technology for
               Nonprofits. Blueprint is a student organization at UC Berkeley
               that strives to make technology accessible and useful for those
               who create communities and promote public welfare.
-            </Body>
+            </Body> */}
             <ButtonContainer
               style={{ marginTop: 8 }}
               onPress={() =>
