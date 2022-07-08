@@ -120,7 +120,7 @@ export default function GettingStartedScreen({ route, navigation }) {
           <HowItWorksContainer>
             <Text
               style={{
-                height: '50%',
+                height: '100%',
                 width: '100%',
                 paddingRight: '10%',
                 paddingLeft: '10%',
