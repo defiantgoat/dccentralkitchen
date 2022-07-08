@@ -191,26 +191,26 @@ export default function SettingsScreen(props) {
           <CategoryBar title="About" />
           <View style={{ padding: 24 }}>
             <Image
-              source={require('../../assets/images/blueprint-logo.png')}
+              source={require('../../assets/images/blue-raster-banner.png')}
               style={{
                 maxWidth: '50%',
                 resizeMode: 'contain',
-                height: 50,
+                height: 90,
                 marginBottom: 4,
               }}
             />
-            <Body>
+            {/* <Body>
               This app was designed and developed by Blueprint, Technology for
               Nonprofits. Blueprint is a student organization at UC Berkeley
               that strives to make technology accessible and useful for those
               who create communities and promote public welfare.
-            </Body>
+            </Body> */}
             <ButtonContainer
               style={{ marginTop: 8 }}
               onPress={() =>
-                WebBrowser.openBrowserAsync('https://calblueprint.org')
+                WebBrowser.openBrowserAsync('https://blueraster.com')
               }>
-              <Body>Click here to learn more at calblueprint.org</Body>
+              <Body>Click here to learn more at blueraster.com</Body>
             </ButtonContainer>
           </View>
           <CategoryBar title="Exit" />
