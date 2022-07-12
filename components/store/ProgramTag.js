@@ -39,10 +39,15 @@ function ProgramTag({ program, tag = false, selected = false, selectedFunc }) {
   // Hopefully ensures that chips will work most of the time, only not displaying if
   // they enter the wrong string of words
   if (
-    (program.toLowerCase() === 'wic' && program !== 'WIC') ||
+    (program.toLowerCase() === 'wic' && program !== 'DC WIC') ||
     (program.toLowerCase() === 'snap/ebt' && program !== 'SNAP/EBT')
   ) {
-    programLabel = program.toUpperCase();
+    if (program.toUpperCase() === 'WIC') {
+      programLabel = `DC ${program.toUpperCase()}`;
+    } else {
+      console.log(programLabel);
+      programLabel = program.toUpperCase();
+    }
   }
 
   if (
@@ -55,7 +60,7 @@ function ProgramTag({ program, tag = false, selected = false, selectedFunc }) {
 
   const labelToIcon = {
     'SNAP/EBT': 'credit-card',
-    'WIC': '',
+    WIC: '',
     'SNAP Match': 'carrot',
     'Healthy Rewards': 'star',
     'Open now': 'clock',

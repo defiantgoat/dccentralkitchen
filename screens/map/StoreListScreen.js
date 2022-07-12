@@ -116,7 +116,7 @@ export default function StoreListScreen(props) {
           }}
         />
         <ProgramTag
-          program="WIC"
+          program="DC WIC"
           tag
           selected={filters.wic}
           selectedFunc={() => {

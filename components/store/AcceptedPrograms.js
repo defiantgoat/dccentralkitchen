@@ -14,7 +14,7 @@ import ProgramTag from './ProgramTag';
 
 const programToDesc = {
   'SNAP/EBT': 'Accepts SNAP/EBT',
-  WIC: 'WIC approved',
+  WIC: 'DC WIC approved',
   'SNAP Match':
     'Spend $5 with SNAP and include fresh produce in purchase to get $5 free on fresh produce',
   'Healthy Rewards': 'Participates in Healthy Rewards',
@@ -66,7 +66,7 @@ export default function AcceptedPrograms({
     <ColumnContainer
       style={{ justifyContent: 'space-between', paddingRight: '20%' }}>
       {snapOrEbtAccepted && <Program programName="SNAP/EBT" />}
-      {wic && <Program programName="WIC" />}
+      {wic && <Program programName="DC WIC" />}
       {couponProgramPartner && <Program programName="SNAP Match" />}
       {rewardsAccepted && <Program programName="Healthy Rewards" />}
     </ColumnContainer>

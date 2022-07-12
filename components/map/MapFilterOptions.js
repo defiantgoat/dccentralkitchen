@@ -70,7 +70,7 @@ export default function MapFilterOptions({ setMapFilterObj }) {
               updateFilterState(newMapFilter);
             }}>
             <MapFilterButtonTextStyling selected={mapFilterState.wic}>
-              WIC
+              DC WIC
             </MapFilterButtonTextStyling>
           </MapFilterTouchableButtonStyling>
         </>
