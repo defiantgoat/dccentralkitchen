@@ -1,6 +1,6 @@
 import { FontAwesome5 } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
-import React from 'react';
+import { useRef, useState } from 'react';
 import { View } from 'react-native';
 import { WebView } from 'react-native-webview';
 import {
@@ -10,16 +10,31 @@ import {
 } from './BaseComponents';
 
 export default function WebComponent({ navigation }) {
+  const webViewRef = useRef();
+  const uri = 'https://healthycorners.calblueprint.org/faq.html';
+  const [currrentUrl, setCurrentUrl] = useState(uri);
+
+  const goBack = () => webViewRef.current.goBack();
+
   return (
     <View style={{ flex: 1 }}>
       <NavHeaderContainer>
-        <NavButtonContainer onPress={() => navigation.toggleDrawer()}>
-          <FontAwesome5 name="bars" solid size={24} />
-        </NavButtonContainer>
+        {currrentUrl.includes(uri) ? (
+          <NavButtonContainer onPress={() => navigation.toggleDrawer()}>
+            <FontAwesome5 name="bars" solid size={24} />
+          </NavButtonContainer>
+        ) : (
+          <NavButtonContainer onPress={goBack}>
+            <FontAwesome5 name="arrow-left" solid size={24} />
+          </NavButtonContainer>
+        )}
         <NavTitle>FAQ</NavTitle>
       </NavHeaderContainer>
       <WebView
-        source={{ uri: 'https://healthycorners.calblueprint.org/faq.html' }}
+        onNavigationStateChange={({ url }) => setCurrentUrl(url)}
+        ref={webViewRef}
+        allowsBackForwardNavigationGestures
+        source={{ uri }}
       />
     </View>
   );
