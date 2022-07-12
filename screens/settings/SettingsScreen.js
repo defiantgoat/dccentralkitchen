@@ -200,9 +200,10 @@ export default function SettingsScreen(props) {
               }}
             />
             <Body>
-            Blue Raster is proud to support World Central Kitchen through technical app support. 
-            Blue Raster assists non-profits to transform conceptual ideas into thoughtful elegant 
-            apps and websites focused on clients looking for map related solutions. 
+              Blue Raster is proud to support World Central Kitchen through
+              technical app support. Blue Raster assists non-profits to
+              transform conceptual ideas into thoughtful elegant apps and
+              websites focused on clients looking for map related solutions.
             </Body>
             <ButtonContainer
               style={{ marginTop: 8 }}
