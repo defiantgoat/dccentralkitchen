@@ -72,7 +72,6 @@ function DrawerNavigator() {
           title: 'Recipes',
         }}
       />
-      {/* <Link to={'https://healthycorners.calblueprint.org/faq.html'}></Link> */}
       <Drawer.Screen
         name="Resources"
         component={ResourcesStackNavigator}
