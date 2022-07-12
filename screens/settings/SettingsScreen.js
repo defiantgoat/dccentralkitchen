@@ -199,18 +199,17 @@ export default function SettingsScreen(props) {
                 marginBottom: 4,
               }}
             />
-            {/* <Body>
-              This app was designed and developed by Blueprint, Technology for
-              Nonprofits. Blueprint is a student organization at UC Berkeley
-              that strives to make technology accessible and useful for those
-              who create communities and promote public welfare.
-            </Body> */}
+            <Body>
+            Blue Raster is proud to support World Central Kitchen through technical app support. 
+            Blue Raster assists non-profits to transform conceptual ideas into thoughtful elegant 
+            apps and websites focused on clients looking for map related solutions. 
+            </Body>
             <ButtonContainer
               style={{ marginTop: 8 }}
               onPress={() =>
                 WebBrowser.openBrowserAsync('https://blueraster.com')
               }>
-              <Body>Click here to learn more at blueraster.com</Body>
+              <Body>Click here to learn more at Blue Raster</Body>
             </ButtonContainer>
           </View>
           <CategoryBar title="Exit" />
