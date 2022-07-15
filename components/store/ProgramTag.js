@@ -60,7 +60,7 @@ function ProgramTag({ program, tag = false, selected = false, selectedFunc }) {
 
   const labelToIcon = {
     'SNAP/EBT': 'credit-card',
-    WIC: '',
+    'DC WIC': '',
     'SNAP Match': 'carrot',
     'Healthy Rewards': 'star',
     'Open now': 'clock',
