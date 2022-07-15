@@ -8,7 +8,7 @@
       "android",
       "web"
     ],
-    "version": "1.6.0",
+    "version": "1.5.4",
     "primaryColor": "#008550",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -25,9 +25,9 @@
       "assets/images/*"
     ],
     "ios": {
-      "bundleIdentifier": "org.calblueprint.HealthyCornersRewards",
+      "bundleIdentifier": "com.blueraster.dcckbeta",
       "googleServicesFile": "./GoogleService-Info.plist",
-      "buildNumber": "1.6.0",
+      "buildNumber": "1.5.4",
       "supportsTablet": true,
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "To find nearby stores and see what products are available.",
@@ -62,7 +62,7 @@
         "ACCESS_FINE_LOCATION",
         "VIBRATE"
       ],
-      "versionCode": 9
+      "versionCode": 8
     },
     "hooks": {
       "postPublish": [
