@@ -1,19 +1,21 @@
+import { FontAwesome5 } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
-import { Checkbox } from 'react-native-paper';
 import iconTrans from '../../assets/images/icon_trans.png';
 import {
   ButtonLabel,
   FilledButtonContainer,
   NavHeaderContainer,
-  Subtitle,
-  Title,
 } from '../../components/BaseComponents';
-import Colors from '../../constants/Colors';
 import Window from '../../constants/Layout';
-import { HowItWorksContainer } from '../../styled/rewards';
+import {
+  HowItWorksButton,
+  HowItWorksView,
+  RewardButtonSubtitle,
+  RewardButtonTitle,
+} from '../../styled/rewards';
 import { ColumnContainer } from '../../styled/shared';
 import { DragBar } from '../../styled/store';
 
@@ -62,62 +64,83 @@ export default function GettingStartedScreen({ route, navigation }) {
           height: Window.height * (75 / 100),
         }}>
         <View>
-          <HowItWorksContainer>
+          <HowItWorksButton onPress={() => console.log('click')}>
             <Image
-              source={require('../../assets/images/Onboarding_2.png')}
+              source={require('../../assets/images/Carrot_White.png')}
               style={{
-                maxWidth: '40%',
+                maxWidth: '30%',
+                marginRight: 8,
                 resizeMode: 'contain',
-                height: 140,
-                marginRight: 12,
+                height: 100,
               }}
             />
             <ColumnContainer style={{ flex: 1 }}>
-              <Title>Find Stores Near You</Title>
-              <Subtitle>
+              <RewardButtonTitle>Find Stores Near You</RewardButtonTitle>
+              <RewardButtonSubtitle>
                 Explore the map to discover nearby stores stocking healthy
                 fruits and vegetables
-              </Subtitle>
+              </RewardButtonSubtitle>
             </ColumnContainer>
-          </HowItWorksContainer>
+            <FontAwesome5
+              style={{ marginRight: 30 }}
+              name="arrow-right"
+              solid
+              size={25}
+              color="white"
+            />
+          </HowItWorksButton>
 
-          <HowItWorksContainer>
+          <HowItWorksButton onPress={() => console.log('click')}>
             <Image
-              source={require('../../assets/images/Onboarding_3.png')}
+              source={require('../../assets/images/Groceries_White.png')}
               style={{
-                maxWidth: '40%',
+                maxWidth: '30%',
+                marginRight: 8,
                 resizeMode: 'contain',
-                height: 140,
-                marginRight: 12,
+                height: 100,
               }}
             />
             <ColumnContainer style={{ flex: 1 }}>
-              <Title>Know What&apos;s In Stock</Title>
-              <Subtitle>
+              <RewardButtonTitle>Know What&apos;s In Stock</RewardButtonTitle>
+              <RewardButtonSubtitle>
                 See what products are available before you leave the house
-              </Subtitle>
+              </RewardButtonSubtitle>
             </ColumnContainer>
-          </HowItWorksContainer>
+            <FontAwesome5
+              style={{ marginRight: 30 }}
+              name="arrow-right"
+              solid
+              size={25}
+              color="white"
+            />
+          </HowItWorksButton>
 
-          <HowItWorksContainer>
+          <HowItWorksButton onPress={() => console.log('click')}>
             <Image
-              source={require('../../assets/images/Onboarding_5.png')}
+              source={require('../../assets/images/Stay_Informed_White.png')}
               style={{
-                maxWidth: '40%',
+                maxWidth: '30%',
+                marginRight: 8,
                 resizeMode: 'contain',
-                height: 140,
-                marginRight: 12,
+                height: 100,
               }}
             />
             <ColumnContainer style={{ flex: 1 }}>
-              <Title>Stay Informed</Title>
-              <Subtitle>
+              <RewardButtonTitle>Stay Informed</RewardButtonTitle>
+              <RewardButtonSubtitle>
                 Connect with resources to access benefits and tools for healthy
                 living.
-              </Subtitle>
+              </RewardButtonSubtitle>
             </ColumnContainer>
-          </HowItWorksContainer>
-          <HowItWorksContainer>
+            <FontAwesome5
+              style={{ marginRight: 30 }}
+              name="arrow-right"
+              solid
+              size={25}
+              color="white"
+            />
+          </HowItWorksButton>
+          <HowItWorksView onPress={() => console.log('click')}>
             <Text
               style={{
                 height: '100%',
@@ -130,9 +153,9 @@ export default function GettingStartedScreen({ route, navigation }) {
               DC Central Kitchen partners with corner stores across D.C. to
               bring affordable, fresh produce close to home.
             </Text>
-          </HowItWorksContainer>
+          </HowItWorksView>
         </View>
-        <View style={styles.checkboxContainer}>
+        {/* <View style={styles.checkboxContainer}>
           <Checkbox.Android
             status={checked ? 'checked' : 'unchecked'}
             // eslint-disable-next-line
@@ -141,6 +164,7 @@ export default function GettingStartedScreen({ route, navigation }) {
           />
           <Text style={styles.label}>Do not show again</Text>
         </View>
+      */}
 
         <FilledButtonContainer
           width="90%"

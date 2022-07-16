@@ -65,6 +65,7 @@ function HowAppWorks() {
               marginRight: 12,
             }}
           />
+
           <ColumnContainer style={{ flex: 1 }}>
             <Title>Stay Informed</Title>
             <Subtitle>

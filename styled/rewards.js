@@ -12,12 +12,53 @@ export const RewardsCardContainer = styled.View`
   background-color: ${Colors.lightestGreen};
 `;
 
-export const HowItWorksContainer = styled.View`
+export const HowItWorksButton = styled.TouchableOpacity`
+  flex-direction: ${PixelRatio.getFontScale() < 1.2 ? 'row' : 'column'};
+  align-items: ${PixelRatio.getFontScale() < 1.2 ? 'center' : 'flex-start'};
+  margin-bottom: ${PixelRatio.getFontScale() < 1.2 ? '12px' : '32px'};
+  width: 100%;
+  border-radius: 30px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  min-height: 160px;
+  background: ${(props) => props.color || Colors.primaryGreen};
+`;
+
+export const HowItWorksView = styled.View`
   flex-direction: ${PixelRatio.getFontScale() < 1.2 ? 'row' : 'column'};
   align-items: ${PixelRatio.getFontScale() < 1.2 ? 'center' : 'flex-start'};
   margin-bottom: ${PixelRatio.getFontScale() < 1.2 ? '12px' : '32px'};
   width: 100%;
 `;
+
+export const RewardButtonTitle = styled.Text`
+  font-family: opensans-semibold;
+  font-size: 18px;
+  line-height: 30px;
+  color: ${(props) => props.color || Colors.activeText};
+  text-align: ${(props) => props.textAlign || 'left'};
+  color: white;
+  width: 98%;
+`;
+
+export const RewardButtonSubtitle = styled.Text`
+  font-family: opensans-regular;
+  font-size: 16px;
+  line-height: 24px;
+  color: ${(props) => props.color || Colors.activeText};
+  text-align: ${(props) => props.textAlign || 'left'};
+  color: white;
+  width: 95%;
+`;
+
+// width: ${(props) => props.width || '100%'};
+// height: ${(props) => props.height || '40px'};
+// background: ${(props) => props.color || Colors.primaryGreen};
+// border-radius: ${(props) => props.borderRadius || '20px'};
+// display: flex;
+// flex-direction: column;
+// justify-content: center;
+// padding-top: 2px;
 
 export const RewardDescriptionContainer = styled.View`
   flex-direction: column;
