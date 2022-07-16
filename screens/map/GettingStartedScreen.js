@@ -78,8 +78,8 @@ export default function GettingStartedScreen({ route, navigation }) {
             <ColumnContainer style={{ flex: 1 }}>
               <RewardButtonTitle>Find Stores Near You</RewardButtonTitle>
               <RewardButtonSubtitle>
-                Explore the map to discover nearby stores stocking healthy
-                fruits and vegetables
+                Explore the map to find nearby stores stocking healthy fruits
+                and vegetables
               </RewardButtonSubtitle>
             </ColumnContainer>
             <FontAwesome5
@@ -102,9 +102,9 @@ export default function GettingStartedScreen({ route, navigation }) {
               }}
             />
             <ColumnContainer style={{ flex: 1 }}>
-              <RewardButtonTitle>Know What&apos;s In Stock</RewardButtonTitle>
+              <RewardButtonTitle>Browse Recipes</RewardButtonTitle>
               <RewardButtonSubtitle>
-                See what products are available before you leave the house
+                Search for your favorite delicious Healthy Corners recipes
               </RewardButtonSubtitle>
             </ColumnContainer>
             <FontAwesome5

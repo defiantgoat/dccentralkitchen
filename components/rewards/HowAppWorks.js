@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image, ScrollView, View } from 'react-native';
-import { HowItWorksContainer } from '../../styled/rewards';
+import { HowItWorksView } from '../../styled/rewards';
 import { ColumnContainer } from '../../styled/shared';
 import { Subtitle, Title } from '../BaseComponents';
 import RewardsFAQ from './RewardsFAQ';
@@ -18,7 +18,7 @@ function HowAppWorks() {
           paddingRight: 16,
           paddingTop: 24,
         }}>
-        <HowItWorksContainer>
+        <HowItWorksView>
           <Image
             source={require('../../assets/images/Onboarding_2.png')}
             style={{
@@ -35,9 +35,9 @@ function HowAppWorks() {
               and vegetables
             </Subtitle>
           </ColumnContainer>
-        </HowItWorksContainer>
+        </HowItWorksView>
 
-        <HowItWorksContainer>
+        <HowItWorksView>
           <Image
             source={require('../../assets/images/Onboarding_3.png')}
             style={{
@@ -53,9 +53,9 @@ function HowAppWorks() {
               See what products are available when you leave the house
             </Subtitle>
           </ColumnContainer>
-        </HowItWorksContainer>
+        </HowItWorksView>
 
-        <HowItWorksContainer>
+        <HowItWorksView>
           <Image
             source={require('../../assets/images/Onboarding_5.png')}
             style={{
@@ -73,7 +73,7 @@ function HowAppWorks() {
               living healthy.
             </Subtitle>
           </ColumnContainer>
-        </HowItWorksContainer>
+        </HowItWorksView>
       </View>
 
       <RewardsFAQ />
