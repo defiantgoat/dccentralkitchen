@@ -2,7 +2,8 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
+import { Text } from 'react-native-elements';
 import iconTrans from '../../assets/images/icon_trans.png';
 import {
   ButtonLabel,
@@ -64,7 +65,7 @@ export default function GettingStartedScreen({ route, navigation }) {
           height: Window.height * (75 / 100),
         }}>
         <View>
-          <HowItWorksButton onPress={() => console.log('click')}>
+          <HowItWorksButton onPress={() => navigation.navigate('Stores')}>
             <Image
               source={require('../../assets/images/Carrot_White.png')}
               style={{
@@ -90,7 +91,7 @@ export default function GettingStartedScreen({ route, navigation }) {
             />
           </HowItWorksButton>
 
-          <HowItWorksButton onPress={() => console.log('click')}>
+          <HowItWorksButton onPress={() => navigation.navigate('Recipes')}>
             <Image
               source={require('../../assets/images/Groceries_White.png')}
               style={{
@@ -115,7 +116,7 @@ export default function GettingStartedScreen({ route, navigation }) {
             />
           </HowItWorksButton>
 
-          <HowItWorksButton onPress={() => console.log('click')}>
+          <HowItWorksButton onPress={() => navigation.navigate('Resources')}>
             <Image
               source={require('../../assets/images/Stay_Informed_White.png')}
               style={{
@@ -140,13 +141,15 @@ export default function GettingStartedScreen({ route, navigation }) {
               color="white"
             />
           </HowItWorksButton>
-          <HowItWorksView onPress={() => console.log('click')}>
+          <HowItWorksView
+            style={{ paddingBottom: 0, marginBottom: 12 }}
+            onPress={() => navigation.navigate('Stores')}>
             <Text
               style={{
                 height: '100%',
                 width: '100%',
-                paddingRight: '10%',
-                paddingLeft: '10%',
+                paddingRight: '5%',
+                paddingLeft: '5%',
                 textAlign: 'center',
                 color: 'black',
               }}>

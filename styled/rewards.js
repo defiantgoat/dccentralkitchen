@@ -13,9 +13,9 @@ export const RewardsCardContainer = styled.View`
 `;
 
 export const HowItWorksButton = styled.TouchableOpacity`
-  flex-direction: ${PixelRatio.getFontScale() < 1.2 ? 'row' : 'column'};
-  align-items: ${PixelRatio.getFontScale() < 1.2 ? 'center' : 'flex-start'};
-  margin-bottom: ${PixelRatio.getFontScale() < 1.2 ? '12px' : '32px'};
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: ${PixelRatio.getFontScale() < 1.2 ? '12px' : '12px'};
   width: 100%;
   border-radius: 30px;
   padding-top: 15px;
@@ -25,30 +25,28 @@ export const HowItWorksButton = styled.TouchableOpacity`
 `;
 
 export const HowItWorksView = styled.View`
-  flex-direction: ${PixelRatio.getFontScale() < 1.2 ? 'row' : 'column'};
-  align-items: ${PixelRatio.getFontScale() < 1.2 ? 'center' : 'flex-start'};
+  flex-direction: row;
+  align-items: center;
   margin-bottom: ${PixelRatio.getFontScale() < 1.2 ? '12px' : '32px'};
   width: 100%;
 `;
 
 export const RewardButtonTitle = styled.Text`
   font-family: opensans-semibold;
-  font-size: 18px;
-  line-height: 30px;
+  font-size: ${PixelRatio.getFontScale() < 1.2 ? '18px' : '14px'};
   color: ${(props) => props.color || Colors.activeText};
+  display: flex;
   text-align: ${(props) => props.textAlign || 'left'};
   color: white;
-  width: 98%;
 `;
 
 export const RewardButtonSubtitle = styled.Text`
   font-family: opensans-regular;
-  font-size: 16px;
-  line-height: 24px;
+  display: flex;
+  font-size: ${PixelRatio.getFontScale() < 1.2 ? '16px' : '12px'};
   color: ${(props) => props.color || Colors.activeText};
   text-align: ${(props) => props.textAlign || 'left'};
   color: white;
-  width: 95%;
 `;
 
 // width: ${(props) => props.width || '100%'};
