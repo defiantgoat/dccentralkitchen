@@ -8,7 +8,6 @@ import Window from '../../constants/Layout';
 import { getMaxWidth } from '../../lib/mapUtils';
 import {
   CardContainer,
-  ColumnContainer,
   InLineContainer,
   RowContainer,
   SpaceBetweenRowContainer,

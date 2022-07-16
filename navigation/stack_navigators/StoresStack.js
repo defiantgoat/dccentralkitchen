@@ -5,7 +5,6 @@ import {
 import React from 'react';
 import { Platform } from 'react-native';
 import Colors from '../../constants/Colors';
-// import RewardsScreen from '../../screens/rewards/RewardsScreen';
 import Window from '../../constants/Layout';
 import GettingStartedScreen from '../../screens/map/GettingStartedScreen';
 import MapScreen from '../../screens/map/MapScreen';

@@ -1,8 +1,7 @@
 import { FontAwesome5 } from '@expo/vector-icons';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Image, StyleSheet, View } from 'react-native';
+import { Image, View } from 'react-native';
 import { Text } from 'react-native-elements';
 import iconTrans from '../../assets/images/icon_trans.png';
 import {
@@ -21,19 +20,6 @@ import { ColumnContainer } from '../../styled/shared';
 import { DragBar } from '../../styled/store';
 
 export default function GettingStartedScreen({ navigation }) {
-  // const [checked, setChecked] = React.useState(false);
-  // const { customerId } = route.params;
-
-  // async function handleCheckbox() {
-  //   setChecked(!checked);
-  //   const customerObj = {
-  //     id: customerId.id,
-  //     showLandingScreen: checked,
-  //   };
-  //   const jsonValue = JSON.stringify(customerObj);
-  //   await AsyncStorage.setItem('customerId', jsonValue);
-  // }
-
   return (
     <View
       style={{
@@ -158,17 +144,6 @@ export default function GettingStartedScreen({ navigation }) {
             </Text>
           </HowItWorksView>
         </View>
-        {/* <View style={styles.checkboxContainer}>
-          <Checkbox.Android
-            status={checked ? 'checked' : 'unchecked'}
-            // eslint-disable-next-line
-            onPress={handleCheckbox}
-            color={Colors.primaryGreen}
-          />
-          <Text style={styles.label}>Do not show again</Text>
-        </View>
-      */}
-
         <FilledButtonContainer
           width="90%"
           onPress={() => {
@@ -181,17 +156,6 @@ export default function GettingStartedScreen({ navigation }) {
   );
 }
 
-const styles = StyleSheet.create({
-  checkboxContainer: {
-    flexDirection: 'row',
-  },
-
-  label: {
-    margin: 8,
-  },
-});
-
 GettingStartedScreen.propTypes = {
-  route: PropTypes.object.isRequired,
   navigation: PropTypes.object.isRequired,
 };

@@ -37,10 +37,6 @@ export default function PermissionsScreen(props) {
         customerId.id,
         'Healthy Corners: Thank you for joining Healthy Corners notifications. Reply STOP to unsubscribe.'
       );
-
-      // console.log(
-      //   response ? '[sendTextMessage] Success' : '[sendTextMessage] Failed'
-      // );
       navigateMapScreen();
     } catch (err) {
       logErrorToSentry({

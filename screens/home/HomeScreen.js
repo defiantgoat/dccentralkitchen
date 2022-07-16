@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 import { Text } from 'react-native-elements';
+import iconTrans from '../../assets/images/icon_trans.png';
 import {
   NavButtonContainer,
   NavHeaderContainer,
@@ -27,13 +28,13 @@ const HomeScreen = (props) => {
         </NavButtonContainer>
         <NavTitle>Recipes</NavTitle>
       </NavHeaderContainer>
-      {/* <Image
+      <Image
         source={iconTrans}
         resizeMode="contain"
         style={{
           height: '50px',
         }}
-      /> */}
+      />
       <View
         style={{
           display: 'flex',

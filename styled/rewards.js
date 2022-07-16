@@ -49,15 +49,6 @@ export const RewardButtonSubtitle = styled.Text`
   color: white;
 `;
 
-// width: ${(props) => props.width || '100%'};
-// height: ${(props) => props.height || '40px'};
-// background: ${(props) => props.color || Colors.primaryGreen};
-// border-radius: ${(props) => props.borderRadius || '20px'};
-// display: flex;
-// flex-direction: column;
-// justify-content: center;
-// padding-top: 2px;
-
 export const RewardDescriptionContainer = styled.View`
   flex-direction: column;
   margin-left: 8px;

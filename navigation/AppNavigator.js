@@ -7,7 +7,6 @@ import WebComponent from '../components/WebComponent';
 import Colors from '../constants/Colors';
 import AuthLoadingScreen from '../screens/auth/AuthLoadingScreen';
 import VerificationScreen from '../screens/auth/VerificationScreen';
-import GettingStartedScreen from '../screens/map/GettingStartedScreen';
 import LandingScreen from '../screens/map/LandingScreen';
 import DrawerContent from './DrawerContent';
 import AuthStackNavigator from './stack_navigators/AuthStack';
@@ -59,11 +58,6 @@ function DrawerNavigator() {
         component={StoresStackNavigator}
         options={{ title: 'Map', swipeEnabled: false }}
       />
-      {/* <Drawer.Screen
-        name="Home"
-        component={GettingStartedScreen}
-        options={{ title: 'Home' }}
-      /> */}
       <Drawer.Screen
         name="WebComponent"
         component={WebComponent}
