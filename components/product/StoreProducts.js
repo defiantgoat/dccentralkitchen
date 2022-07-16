@@ -6,11 +6,7 @@ import { PixelRatio, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import Colors from '../../constants/Colors';
 import Window from '../../constants/Layout';
-import {
-  ColumnContainer,
-  RowContainer,
-  SpaceBetweenRowContainer,
-} from '../../styled/shared';
+import { CardContainer, RowContainer, SpaceBetweenRowContainer } from '../../styled/shared';
 import { StoreDetailText } from '../../styled/store';
 import {
   Body,
@@ -26,7 +22,7 @@ export default function StoreProducts({ navigation, store, products }) {
     <View>
       <StoreCard store={store} key={store.id} />
       <View>
-        <ColumnContainer>
+        <CardContainer>
           <SpaceBetweenRowContainer
             style={{ marginTop: 4, marginBottom: 8, marginHorizontal: 16 }}>
             <RowContainer>
@@ -60,7 +56,7 @@ export default function StoreProducts({ navigation, store, products }) {
               This store regularly stocks additional produce from other vendors.
             </Body>
           )}
-        </ColumnContainer>
+        </CardContainer>
         <FlatList
           horizontal
           data={products}

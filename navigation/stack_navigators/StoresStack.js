@@ -39,18 +39,6 @@ export default function StoresStackNavigator() {
         name="ProductDetails"
         component={ProductDetailsScreen}
       />
-      {/* request hide healthy rewards */}
-      {/* <StoresStack.Screen
-        name="RewardsOverlay"
-        component={RewardsScreen}
-        options={{
-          cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
-          gestureDirection: 'vertical',
-          gestureResponseDistance: {
-            vertical: 162 + useSafeAreaInsets().top,
-          },
-        }}
-      /> */}
       <StoresStack.Screen
         name="GettingStartedOverlay"
         component={GettingStartedScreen}

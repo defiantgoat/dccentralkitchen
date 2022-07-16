@@ -4,7 +4,7 @@ import * as WebBrowser from 'expo-web-browser';
 import PropTypes from 'prop-types';
 import React from 'react';
 import Colors from '../../constants/Colors';
-import { ColumnContainer, SpaceBetweenRowContainer } from '../../styled/shared';
+import { CardContainer, SpaceBetweenRowContainer } from '../../styled/shared';
 import { styles } from '../../styled/store';
 import { Body, ButtonContainer, ButtonLabel } from '../BaseComponents';
 import ProgramTag from './ProgramTag';
@@ -27,7 +27,7 @@ function Program({ programName }) {
   return (
     <SpaceBetweenRowContainer>
       <ProgramTag program={programName} />
-      <ColumnContainer style={styles.tagChipDesc}>
+      <CardContainer style={styles.tagChipDesc}>
         <Body>{programToDesc[programName]}</Body>
         {programName === 'SNAP Match' && (
           <ButtonContainer
@@ -51,7 +51,7 @@ function Program({ programName }) {
             />
           </ButtonContainer>
         )}
-      </ColumnContainer>
+      </CardContainer>
     </SpaceBetweenRowContainer>
   );
 }
@@ -63,13 +63,13 @@ export default function AcceptedPrograms({
   rewardsAccepted,
 }) {
   return (
-    <ColumnContainer
+    <CardContainer
       style={{ justifyContent: 'space-between', paddingRight: '20%' }}>
       {snapOrEbtAccepted && <Program programName="SNAP/EBT" />}
       {wic && <Program programName="DC WIC" />}
       {couponProgramPartner && <Program programName="SNAP Match" />}
       {rewardsAccepted && <Program programName="Healthy Rewards" />}
-    </ColumnContainer>
+    </CardContainer>
   );
 }
 

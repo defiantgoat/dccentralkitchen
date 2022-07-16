@@ -24,7 +24,7 @@ import {
   toggleFavoriteStore,
   writeToClipboard,
 } from '../../lib/mapUtils';
-import { ColumnContainer, InLineContainer } from '../../styled/shared';
+import { CardContainer, InLineContainer } from '../../styled/shared';
 
 export default function StoreDetailsScreen(props) {
   const { store, hideFavorite } = props.route.params;
@@ -94,7 +94,7 @@ export default function StoreDetailsScreen(props) {
             color={Colors.activeText}
             style={{ marginRight: 12 }}
           />
-          <ColumnContainer style={{ width: '100%' }}>
+          <CardContainer style={{ width: '100%' }}>
             <Body style={{ marginBottom: 8 }}>Accepted Programs</Body>
             {/* Chips */}
             {store.snapOrEbtAccepted ||
@@ -112,7 +112,7 @@ export default function StoreDetailsScreen(props) {
                 No programs accepted at this time
               </Body>
             )}
-          </ColumnContainer>
+          </CardContainer>
         </InLineContainer>
         {/* Directions */}
         <View style={{ paddingBottom: 32 }}>
@@ -122,7 +122,7 @@ export default function StoreDetailsScreen(props) {
               size={24}
               color={Colors.activeText}
             />
-            <ColumnContainer
+            <CardContainer
               style={{
                 paddingLeft: 12,
                 paddingRight: 50,
@@ -167,7 +167,7 @@ export default function StoreDetailsScreen(props) {
                   color={Colors.primaryOrange}
                 />
               </ButtonContainer>
-            </ColumnContainer>
+            </CardContainer>
           </InLineContainer>
         </View>
         {/* Phone Number */}
@@ -204,7 +204,7 @@ export default function StoreDetailsScreen(props) {
             color={Colors.activeText}
             style={{ marginRight: 12 }}
           />
-          <ColumnContainer>
+          <CardContainer>
             <Body
               color={
                 store.storeOpenStatus.includes('Open')
@@ -215,7 +215,7 @@ export default function StoreDetailsScreen(props) {
               {store.storeOpenStatus}
             </Body>
             <StoreHours hours={store.storeHours} />
-          </ColumnContainer>
+          </CardContainer>
         </InLineContainer>
       </ScrollView>
     </View>

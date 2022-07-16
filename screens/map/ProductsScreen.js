@@ -10,7 +10,7 @@ import {
 } from '../../components/BaseComponents';
 import ProductCard from '../../components/product/ProductCard';
 import { ProductListContainer } from '../../styled/product';
-import { ColumnContainer } from '../../styled/shared';
+import { CardContainer } from '../../styled/shared';
 
 export default function ProductsScreen(props) {
   const { products, store } = props.route.params;
@@ -44,9 +44,9 @@ export default function ProductsScreen(props) {
             <View style={{ width: 20, height: 20 }} />
           )}
           ListHeaderComponent={
-            <ColumnContainer style={{ marginBottom: 20 }}>
+            <CardContainer style={{ marginBottom: 20 }}>
               <Title>{`Products (${products.length})`}</Title>
-            </ColumnContainer>
+            </CardContainer>
           }
           ListFooterComponent={<View style={{ height: 500 }} />}
         />

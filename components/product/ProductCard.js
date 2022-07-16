@@ -5,7 +5,7 @@ import { Image, PixelRatio } from 'react-native';
 import Colors from '../../constants/Colors';
 import Window from '../../constants/Layout';
 import { displayDollarValue } from '../../lib/common';
-import { ColumnContainer, RowContainer } from '../../styled/shared';
+import { CardContainer, RowContainer } from '../../styled/shared';
 import { Body, ButtonContainer, Caption } from '../BaseComponents';
 
 function ProductCard({
@@ -26,7 +26,7 @@ function ProductCard({
           store,
         });
       }}>
-      <ColumnContainer
+      <CardContainer
         style={{
           width: productsScreen
             ? (Window.width - 32 - 40) / 2
@@ -64,7 +64,7 @@ function ProductCard({
             </Caption>
           )}
         </RowContainer>
-      </ColumnContainer>
+      </CardContainer>
     </ButtonContainer>
   );
 }
