@@ -54,16 +54,16 @@ function DrawerNavigator() {
       screenOptions={{
         headerShown: false,
       }}>
-      {/* <Drawer.Screen
-        name="Home"
-        component={GettingStartedScreen}
-        options={{ title: 'Home' }}
-      /> */}
       <Drawer.Screen
         name="Stores"
         component={StoresStackNavigator}
         options={{ title: 'Map', swipeEnabled: false }}
       />
+      {/* <Drawer.Screen
+        name="Home"
+        component={GettingStartedScreen}
+        options={{ title: 'Home' }}
+      /> */}
       <Drawer.Screen
         name="WebComponent"
         component={WebComponent}
