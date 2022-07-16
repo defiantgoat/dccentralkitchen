@@ -51,7 +51,7 @@ export default class RecipesScreen extends React.Component {
             onPress={() => this.props.navigation.toggleDrawer()}>
             <FontAwesome5 name="bars" solid size={24} />
           </NavButtonContainer>
-          <NavTitle>Recipes</NavTitle>
+          <NavTitle> Search for your favorite Healthy Corners recipes</NavTitle>
         </NavHeaderContainer>
         <Searchbar
           placeholder="Search"
@@ -76,6 +76,16 @@ RecipesScreen.propTypes = {
 };
 
 const styles = StyleSheet.create({
+  subtitle: {
+    width: '80%',
+    marginRight: 'auto',
+    marginLeft: 'auto',
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginTop: 20,
+    marginBottom: 20,
+  },
   slideContainer: {
     flex: 1,
   },
