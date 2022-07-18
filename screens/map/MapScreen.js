@@ -127,10 +127,7 @@ export default function MapScreen(props) {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const customerId = await getAsyncCustomerAuth();
-      if (customerId.showLandingScreen) {
-        props.navigation.navigate('GettingStartedOverlay', { customerId });
-      }
+      await getAsyncCustomerAuth();
     };
 
     fetchUser();

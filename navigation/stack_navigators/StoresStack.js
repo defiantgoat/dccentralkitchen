@@ -1,12 +1,7 @@
-import {
-  createStackNavigator,
-  TransitionPresets,
-} from '@react-navigation/stack';
+import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import { Platform } from 'react-native';
 import Colors from '../../constants/Colors';
-import Window from '../../constants/Layout';
-import GettingStartedScreen from '../../screens/map/GettingStartedScreen';
 import MapScreen from '../../screens/map/MapScreen';
 import ProductDetailsScreen from '../../screens/map/ProductDetailsScreen';
 import ProductsScreen from '../../screens/map/ProductsScreen';
@@ -37,17 +32,6 @@ export default function StoresStackNavigator() {
       <StoresStack.Screen
         name="ProductDetails"
         component={ProductDetailsScreen}
-      />
-      <StoresStack.Screen
-        name="GettingStartedOverlay"
-        component={GettingStartedScreen}
-        options={{
-          gestureDirection: 'vertical',
-          gestureResponseDistance: {
-            vertical: Window.height,
-          },
-          ...TransitionPresets.ModalPresentationIOS,
-        }}
       />
       <StoresStack.Screen
         name="StoreDetailsScreen"

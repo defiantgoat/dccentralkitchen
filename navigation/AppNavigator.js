@@ -10,6 +10,7 @@ import VerificationScreen from '../screens/auth/VerificationScreen';
 import LandingScreen from '../screens/map/LandingScreen';
 import DrawerContent from './DrawerContent';
 import AuthStackNavigator from './stack_navigators/AuthStack';
+import GettingStartedStack from './stack_navigators/GettingStartedStack';
 import RecipesStackNavigator from './stack_navigators/RecipesStack';
 import ResourcesStackNavigator from './stack_navigators/ResourcesStack';
 import SettingsStackNavigator from './stack_navigators/SettingsStack';
@@ -53,6 +54,11 @@ function DrawerNavigator() {
       screenOptions={{
         headerShown: false,
       }}>
+      <Drawer.Screen
+        name="Home"
+        component={GettingStartedStack}
+        options={{ title: 'Home', swipeEnabled: false }}
+      />
       <Drawer.Screen
         name="Stores"
         component={StoresStackNavigator}
