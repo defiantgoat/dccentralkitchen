@@ -22,11 +22,8 @@ import {
   setAsyncCustomerAuth,
 } from '../../lib/authUtils';
 import { logErrorToSentry, setUserLog } from '../../lib/logUtils';
-import {
-  AuthScreenContainer,
-  BackButton,
-  FormContainer,
-} from '../../styled/auth';
+import { AuthScreenContainer, BackButton } from '../../styled/auth';
+import { CardContainer } from '../../styled/shared';
 import validate from './validation';
 
 if (!firebase.apps.length) {
@@ -231,7 +228,7 @@ export default class PhoneNumberScreen extends React.Component {
             You will receive an SMS for verification. Msg & data rates may
             apply.
           </Caption>
-          <FormContainer>
+          <CardContainer>
             <AuthTextField
               fieldType="Phone Number"
               value={values[inputFields.PHONENUM]}
@@ -248,7 +245,7 @@ export default class PhoneNumberScreen extends React.Component {
               color={Colors.error}>
               {errors.submit}
             </Caption>
-          </FormContainer>
+          </CardContainer>
           <FilledButtonContainer
             style={{ marginVertical: 24 }}
             color={!validNumber ? Colors.lightestGreen : Colors.primaryGreen}
