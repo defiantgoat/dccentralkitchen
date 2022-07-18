@@ -200,7 +200,7 @@ export default function SettingsScreen(props) {
               }}
             />
             <Body>
-              Blue Raster is proud to support World Central Kitchen through
+              Blue Raster is proud to support DC Central Kitchen through
               technical app support. Blue Raster assists non-profits,
               transforming conceptual ideas into thoughtful, elegant apps and
               websites, unlocking location intelligence to solve the world’s

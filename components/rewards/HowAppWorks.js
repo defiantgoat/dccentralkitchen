@@ -31,8 +31,8 @@ function HowAppWorks() {
           <CardContainer style={{ flex: 1 }}>
             <Title>Find Stores Near You</Title>
             <Subtitle>
-              Explore the map to discover nearby stores stocking healthy fruits
-              and vegetables
+              Explore the map to find nearby stores stocking healthy fruits and
+              vegetables
             </Subtitle>
           </CardContainer>
         </HowItWorksView>
@@ -48,9 +48,9 @@ function HowAppWorks() {
             }}
           />
           <CardContainer style={{ flex: 1 }}>
-            <Title>Know What&apos;s In Stock</Title>
+            <Title>Browse Recipes</Title>
             <Subtitle>
-              See what products are available when you leave the house
+              Search for your favorite delicious Healthy Corners recipes
             </Subtitle>
           </CardContainer>
         </HowItWorksView>

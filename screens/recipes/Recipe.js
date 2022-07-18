@@ -2,6 +2,7 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+import bannerLogo from '../../assets/images/banner_logo.png';
 import {
   NavButtonContainer,
   NavHeaderContainer,
@@ -21,8 +22,20 @@ const Recipe = (props) => {
         </NavButtonContainer>
         <NavTitle>Recipes</NavTitle>
       </NavHeaderContainer>
+
       <View style={styles.listView}>
         <ScrollView style={styles.container}>
+          <Image
+            source={bannerLogo}
+            resizeMode="contain"
+            style={{
+              height: 100,
+              display: 'flex',
+              marginRight: 'auto',
+              marginLeft: 'auto',
+              width: 250,
+            }}
+          />
           <Text style={styles.heading}>{item.title}</Text>
           <IconContainer>
             <Image
