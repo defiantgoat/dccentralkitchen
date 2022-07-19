@@ -70,7 +70,7 @@ function HowAppWorks() {
             <Title>Stay Informed</Title>
             <Subtitle>
               Access our resource database to help you continue eating and
-              living healthy.
+              living healthy
             </Subtitle>
           </CardContainer>
         </HowItWorksView>

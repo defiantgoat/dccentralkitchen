@@ -1,7 +1,8 @@
 const ONBOARDING_CONTENT = [
   {
     title: 'Welcome to Healthy Corners!',
-    body: 'Start finding fresh and healthy food at discount prices',
+    body:
+      'DC Central Kitchen partners with corner stores across D.C. to bring affordable, fresh produce close to home',
     illustration: require('../assets/images/Onboarding_1.png'),
   },
   {
@@ -18,7 +19,7 @@ const ONBOARDING_CONTENT = [
   {
     title: 'Stay informed',
     body:
-      'Access our resource database to help you continue eating and living healthy.',
+      'Connect with resources to access benefits and tools for healthy living',
     illustration: require('../assets/images/Onboarding_5.png'),
   },
 ];

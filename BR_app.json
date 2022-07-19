@@ -8,7 +8,7 @@
       "android",
       "web"
     ],
-    "version": "1.5.0",
+    "version": "1.5.8",
     "primaryColor": "#008550",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -27,7 +27,7 @@
     "ios": {
       "bundleIdentifier": "com.blueraster.dcckbeta",
       "googleServicesFile": "./GoogleService-Info.plist",
-      "buildNumber": "1.5.0",
+      "buildNumber": "1.5.5",
       "supportsTablet": true,
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "To find nearby stores and see what products are available.",

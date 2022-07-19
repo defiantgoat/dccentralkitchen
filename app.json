@@ -3,12 +3,8 @@
     "name": "Healthy Corners",
     "slug": "healthy-corners",
     "privacy": "public",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
-    "version": "1.5.7",
+    "platforms": ["ios", "android", "web"],
+    "version": "1.5.9",
     "primaryColor": "#008550",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -21,13 +17,11 @@
     "updates": {
       "fallbackToCacheTimeout": 3000
     },
-    "assetBundlePatterns": [
-      "assets/images/*"
-    ],
+    "assetBundlePatterns": ["assets/images/*"],
     "ios": {
       "bundleIdentifier": "com.blueraster.dcckbeta",
       "googleServicesFile": "./GoogleService-Info.plist",
-      "buildNumber": "1.5.4",
+      "buildNumber": "1.5.6",
       "supportsTablet": true,
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "To find nearby stores and see what products are available.",

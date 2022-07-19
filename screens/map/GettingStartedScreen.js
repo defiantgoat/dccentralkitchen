@@ -59,7 +59,7 @@ export default function GettingStartedScreen({ navigation }) {
               color: 'black',
             }}>
             DC Central Kitchen partners with corner stores across D.C. to bring
-            affordable, fresh produce close to home.
+            affordable, fresh produce close to home
           </Text>
         </HowItWorksView>
         <View>
@@ -128,7 +128,7 @@ export default function GettingStartedScreen({ navigation }) {
               <RewardButtonTitle>Stay Informed</RewardButtonTitle>
               <RewardButtonSubtitle>
                 Connect with resources to access benefits and tools for healthy
-                living.
+                living
               </RewardButtonSubtitle>
             </ColumnContainer>
             <FontAwesome5
