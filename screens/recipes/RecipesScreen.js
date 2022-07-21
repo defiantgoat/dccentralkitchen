@@ -1,12 +1,12 @@
 import { FontAwesome5 } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { FlatList, StyleSheet, View } from 'react-native';
+import { FlatList, Image, StyleSheet, Text, View } from 'react-native';
 import { Searchbar } from 'react-native-paper';
+import bannerLogo from '../../assets/images/banner_logo.png';
 import {
   NavButtonContainer,
   NavHeaderContainer,
-  NavTitle,
 } from '../../components/BaseComponents';
 import RecipeCard from '../../components/recipes/RecipeCard';
 import { getAllRecipes } from '../../lib/airtable/request';
@@ -51,8 +51,30 @@ export default class RecipesScreen extends React.Component {
             onPress={() => this.props.navigation.toggleDrawer()}>
             <FontAwesome5 name="bars" solid size={24} />
           </NavButtonContainer>
-          <NavTitle> Search for your favorite Healthy Corners recipes</NavTitle>
+          <Image
+            source={bannerLogo}
+            resizeMode="contain"
+            style={{
+              display: 'flex',
+              marginRight: 'auto',
+              width: '80%',
+              height: 50,
+            }}
+          />
         </NavHeaderContainer>
+        <Text
+          style={{
+            width: '80%',
+            textAlign: 'center',
+            marginRight: 'auto',
+            marginLeft: 'auto',
+            paddingTop: 10,
+            paddingBottom: 10,
+            fontWeight: 'bold',
+            fontSize: 20,
+          }}>
+          Search for your favorite Healthy Corners recipes
+        </Text>
         <Searchbar
           placeholder="Search"
           iconColor="black"

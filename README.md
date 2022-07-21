@@ -11,3 +11,8 @@ All documentation lives at <https://healthycorners-rewards.netlify.app> - for ne
 
 - Clerk-facing tablet application: [`dccentralkitchen-clerks`](https://github.com/calblueprint/dccentralkitchen-clerks)
 - Backend server: [`dccentralkitchen-node`](https://github.com/calblueprint/dccentralkitchen-node)
+
+
+Run sim build
+NODE_ENV=production expo build:ios
+NODE_ENV=production expo build:android
