@@ -10,7 +10,7 @@ import BottomSheet from 'reanimated-bottom-sheet';
 import {
   NavHeaderContainer,
   Subtitle,
-  Title,
+  Title
 } from '../../components/BaseComponents';
 import CenterLocation from '../../components/CenterLocation';
 import Hamburger from '../../components/Hamburger';
@@ -29,17 +29,20 @@ import {
   sortByDistance,
   useCurrentLocation,
   useStoreProducts,
-  useStores,
+  useStores
 } from '../../lib/mapUtils';
 import {
   BottomSheetContainer,
   BottomSheetHeaderContainer,
   DragBar,
-  SearchBar,
+  SearchBar
 } from '../../styled/store';
 
 const snapPoints = [185, 325, 488];
 export default function MapScreen(props) {
+  const stores = useStores();
+
+  const [_stores, setStores] = useState();
   const [region, setRegion] = useState(initialRegion);
   const [currentStore, setCurrentStore] = useState(null);
   const [mapFilterObj, setMapFilterObj] = useState();
@@ -48,22 +51,14 @@ export default function MapScreen(props) {
   const storeProducts = useStoreProducts(currentStore);
   const { locationPermissions, currentLocation } = useCurrentLocation();
 
-  // check for stores > update store distances
-  const stores = useStores();
+  const _showDefaultStore =
+    locationPermissions !== 'granted' ||
+    (stores.length > 0 && !stores[0].distance);
 
-  // sort by distance
-  stores.forEach((store) => {
-    const currStore = store;
-    currStore.distance = findStoreDistance(currentLocation, store);
-  });
-  stores.sort((a, b) => sortByDistance(a, b));
+  const [showDefaultStore, setDefaultStore] = useState(_showDefaultStore);
 
   const bottomSheetRef = useRef(null);
   const mapRef = useRef(null);
-
-  const showDefaultStore =
-    locationPermissions !== 'granted' ||
-    (stores.length > 0 && !stores[0].distance);
 
   useFocusEffect(
     useCallback(() => {
@@ -87,43 +82,57 @@ export default function MapScreen(props) {
   }, [props.route.params]);
 
   useEffect(() => {
+    // sort by distance
+    stores.forEach((store) => {
+      const currStore = store;
+      currStore.distance = findStoreDistance(currentLocation, store);
+    });
+    stores.sort((a, b) => sortByDistance(a, b)); // ! sorted by location here
+    setStores(stores);
+    setDefaultStore(
+      locationPermissions !== 'granted' ||
+        (stores.length > 0 && !stores[0].distance)
+    );
+  }, [stores, locationPermissions]); // eslint-disable-line
+
+  useEffect(() => {
     // if default store go to store
     // else go to closest store
-    if (!stores.length) return;
+    if (!_stores || !mapFilterObj) return;
 
     // check for location permissions
     const locationAccess = locationPermissions === 'granted';
 
     // check for user default store
+    let filteredStoresCopy;
     if (mapFilterObj) {
-      let filteredStoresCopy;
       if (mapFilterObj.wic && !mapFilterObj.couponProgramPartner) {
-        filteredStoresCopy = stores.filter((store) => store.wic);
+        filteredStoresCopy = _stores.filter((store) => store.wic);
       } else if (mapFilterObj.couponProgramPartner && !mapFilterObj.wic) {
-        filteredStoresCopy = stores.filter(
+        filteredStoresCopy = _stores.filter(
           (store) => store.couponProgramPartner && !store.wic
         );
       } else if (mapFilterObj.wic && mapFilterObj.couponProgramPartner) {
-        filteredStoresCopy = stores.filter(
+        filteredStoresCopy = _stores.filter(
           (store) => store.couponProgramPartner && store.wic
         );
       } else {
-        filteredStoresCopy = stores;
+        filteredStoresCopy = _stores;
       }
       setFilteredStores(filteredStoresCopy);
-      changeCurrentStore(filteredStoresCopy[0], true, false);
     }
-    if (!currentStore && locationAccess) {
-      const hasDefaultStore = stores.length > 0 || !stores[0].distance;
-
+    if (!locationAccess) {
+      changeCurrentStore(filteredStoresCopy[0], true, false);
+    } else {
+      const hasDefaultStore = !_stores[0].distance;
       if (hasDefaultStore) {
-        const { defaultStore } = findDefaultStore(stores);
+        const { defaultStore } = findDefaultStore(_stores);
         changeCurrentStore(defaultStore, false, false);
       } else {
-        changeCurrentStore(stores[0], true, true);
+        changeCurrentStore(_stores[0], false, false);
       }
     }
-  }, [mapFilterObj, stores]); // eslint-disable-line
+  }, [mapFilterObj, _stores]); // eslint-disable-line
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -140,10 +149,10 @@ export default function MapScreen(props) {
     resetSheet = false,
     animate = true
   ) => {
-    Analytics.logEvent('view_store_products', {
-      store_name: store.storeName,
-      products_in_stock: 'productIds' in store ? store.productIds.length : 0,
-    });
+    // Analytics.logEvent('view_store_products', {
+    //   store_name: store.storeName,
+    //   products_in_stock: 'productIds' in store ? store.productIds.length : 0,
+    // });
 
     const newRegion = {
       latitude: store.latitude - deltas.latitudeDelta / 3.5,
@@ -160,16 +169,6 @@ export default function MapScreen(props) {
       setRegion(newRegion);
     }
   };
-
-  // Once stores are loaded, set an initial store to focus on
-  if (!currentStore && locationPermissions && stores.length > 0) {
-    if (showDefaultStore) {
-      const { defaultStore } = findDefaultStore(stores);
-      changeCurrentStore(defaultStore, false, false);
-    } else {
-      changeCurrentStore(stores[0], false, false);
-    }
-  }
 
   const renderContent = () => {
     return (
@@ -272,7 +271,7 @@ export default function MapScreen(props) {
             onPress={() => changeCurrentStore(store)}>
             <StoreMarker
               showName={region.longitudeDelta < 0.07}
-              storeName={store.storeName}
+              storeName={store.storeName ?? ''}
               focused={currentStore && currentStore.id === store.id}
               wic={mapFilterObj.wic}
               couponProgramPartner={mapFilterObj.couponProgramPartner}

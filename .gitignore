@@ -153,3 +153,6 @@ web-build/
 dist/
 
 # @end expo-cli
+.eslintignore
+ios/*
+android/*
