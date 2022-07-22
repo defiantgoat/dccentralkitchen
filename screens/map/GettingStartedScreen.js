@@ -51,6 +51,7 @@ export default function GettingStartedScreen({ navigation }) {
         <HowItWorksView onPress={() => navigation.navigate('Stores')}>
           <Text
             style={{
+              fontSize: 18,
               height: '100%',
               width: '100%',
               paddingRight: '5%',
