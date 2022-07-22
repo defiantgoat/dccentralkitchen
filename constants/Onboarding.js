@@ -6,7 +6,7 @@ const ONBOARDING_CONTENT = [
     illustration: require('../assets/images/Onboarding_1.png'),
   },
   {
-    title: 'Find stores for you',
+    title: 'Find stores near you',
     body:
       'Explore the map to find nearby stores stocking healthy fruits and vegetables',
     illustration: require('../assets/images/Onboarding_2.png'),
