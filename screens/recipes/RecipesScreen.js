@@ -58,7 +58,7 @@ export default class RecipesScreen extends React.Component {
               display: 'flex',
               marginRight: 'auto',
               width: '80%',
-              height: 50,
+              height: 70,
             }}
           />
         </NavHeaderContainer>
