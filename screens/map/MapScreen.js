@@ -3,7 +3,7 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import { useFocusEffect } from '@react-navigation/native';
 import * as Analytics from 'expo-firebase-analytics';
 import PropTypes from 'prop-types';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { ActivityIndicator, PixelRatio, StyleSheet, View } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import BottomSheet from 'reanimated-bottom-sheet';
@@ -139,34 +139,37 @@ export default function MapScreen(props) {
     fetchUser();
   }, []); // eslint-disable-line
 
+  useEffect(() => {
+    changeCurrentStore(stores[0]);
+  }, [stores]);
+
   // Update the current store and map region.
   // Only expand (reset) the bottom sheet to display products if navigated from StoreList
+
   const changeCurrentStore = async (
     store,
     resetSheet = false,
     animate = true
   ) => {
-    // Analytics.logEvent('view_store_products', {
-    //   store_name: store.storeName,
-    //   products_in_stock: 'productIds' in store ? store.productIds.length : 0,
-    // });
-    console.log('changeCurrentStore');
+    Analytics.logEvent('view_store_products', {
+      store_name: store.storeName,
+      products_in_stock: 'productIds' in store ? store.productIds.length : 0,
+    });
+
     const newRegion = {
       latitude: store.latitude - deltas.latitudeDelta / 3.5,
       longitude: store.longitude,
       ...deltas,
     };
-    if (newRegion === region) return;
     setCurrentStore(store);
     if (resetSheet) {
       bottomSheetRef.current.snapTo(1);
     }
-    // // if (animate) {
-    // console.log(mapRef.current.animateToRegion(newRegion, 1000));
-    // setTimeout(() => {
-    setRegion(newRegion);
-    // }, 1000);
-    // }
+    if (animate) {
+      await mapRef.current.animateToRegion(newRegion, 1000);
+    } else {
+      setRegion(newRegion);
+    }
   };
 
   const renderContent = () => {
@@ -257,12 +260,8 @@ export default function MapScreen(props) {
         showsUserLocation
         ref={mapRef}
         mapType="mutedStandard"
-        region={region}
-        // onRegionChangeComplete={(newRegion) => {
-        //   console.log('onRegionChange');
-        //   mapRef.current.animateToRegion(newRegion, 1000);
-        // }}
-      >
+        initialRegion={region}
+        onRegionChangeComplete={(newRegion) => setRegion(newRegion)}>
         {/* Display store markers */}
         {filteredStores.map((store) => (
           <Marker
