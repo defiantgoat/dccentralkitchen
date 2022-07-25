@@ -150,21 +150,22 @@ export default function MapScreen(props) {
     //   store_name: store.storeName,
     //   products_in_stock: 'productIds' in store ? store.productIds.length : 0,
     // });
-
     const newRegion = {
       latitude: store.latitude - deltas.latitudeDelta / 3.5,
       longitude: store.longitude,
       ...deltas,
     };
+    if (newRegion === region) return;
     setCurrentStore(store);
     if (resetSheet) {
       bottomSheetRef.current.snapTo(1);
     }
-    if (animate) {
-      await mapRef.current.animateToRegion(newRegion, 1000);
-    } else {
-      setRegion(newRegion);
-    }
+    // if (animate) {
+    // mapRef.current.animateToRegion(newRegion, 1000);
+    // setTimeout(() => {
+    setRegion(newRegion);
+    // }, 1000);
+    // }
   };
 
   const renderContent = () => {
@@ -256,7 +257,11 @@ export default function MapScreen(props) {
         ref={mapRef}
         mapType="mutedStandard"
         region={region}
-        onRegionChangeComplete={(newRegion) => setRegion(newRegion)}>
+        // onRegionChangeComplete={(newRegion) => {
+        //   console.log('onRegionChange');
+        //   mapRef.current.animateToRegion(newRegion, 1000);
+        // }}
+      >
         {/* Display store markers */}
         {filteredStores.map((store) => (
           <Marker
