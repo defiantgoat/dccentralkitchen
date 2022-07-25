@@ -122,25 +122,26 @@ function DrawerContent(props) {
             <BigTitle style={{ color: Colors.lightText }}>
               {customer.name}
             </BigTitle>
-            {isGuest && (
-              <FilledButtonContainer
-                style={{
-                  borderColor: Colors.lightText,
-                  borderWidth: 1,
-                  height: 30,
-                  width: 80,
-                  marginVertical: 8,
-                  marginRight: 8,
-                }}
-                color={Colors.bgLight}
-                onPress={() => logout()}>
-                {logoutIsLoading ? (
-                  <ActivityIndicator />
-                ) : (
-                  <ButtonLabel noCaps>Log In</ButtonLabel>
-                )}
-              </FilledButtonContainer>
-            )}
+
+            <FilledButtonContainer
+              style={{
+                borderColor: Colors.lightText,
+                borderWidth: 1,
+                height: 30,
+                width: 80,
+                marginVertical: 8,
+                marginRight: 8,
+              }}
+              color={Colors.bgLight}
+              onPress={() => logout()}>
+              {logoutIsLoading ? (
+                <ActivityIndicator />
+              ) : (
+                <ButtonLabel noCaps>
+                  {isGuest ? 'Log In' : 'Log Out'}
+                </ButtonLabel>
+              )}
+            </FilledButtonContainer>
           </SpaceBetweenRowContainer>
         </CardContainer>
       </View>

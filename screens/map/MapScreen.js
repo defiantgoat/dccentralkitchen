@@ -10,7 +10,7 @@ import BottomSheet from 'reanimated-bottom-sheet';
 import {
   NavHeaderContainer,
   Subtitle,
-  Title
+  Title,
 } from '../../components/BaseComponents';
 import CenterLocation from '../../components/CenterLocation';
 import Hamburger from '../../components/Hamburger';
@@ -22,20 +22,19 @@ import Colors from '../../constants/Colors';
 import { deltas, initialRegion } from '../../constants/Map';
 import { getAsyncCustomerAuth } from '../../lib/authUtils';
 import {
-  findDefaultStore,
   findStoreDistance,
   getAsyncStorageMapFilters,
   setInitialAsyncStorageMapFilters,
   sortByDistance,
   useCurrentLocation,
   useStoreProducts,
-  useStores
+  useStores,
 } from '../../lib/mapUtils';
 import {
   BottomSheetContainer,
   BottomSheetHeaderContainer,
   DragBar,
-  SearchBar
+  SearchBar,
 } from '../../styled/store';
 
 const snapPoints = [185, 325, 488];
@@ -104,7 +103,7 @@ export default function MapScreen(props) {
     const locationAccess = locationPermissions === 'granted';
 
     // check for user default store
-    let filteredStoresCopy;
+    let filteredStoresCopy = _stores;
     if (mapFilterObj) {
       if (mapFilterObj.wic && !mapFilterObj.couponProgramPartner) {
         filteredStoresCopy = _stores.filter((store) => store.wic);
@@ -116,21 +115,19 @@ export default function MapScreen(props) {
         filteredStoresCopy = _stores.filter(
           (store) => store.couponProgramPartner && store.wic
         );
-      } else {
-        filteredStoresCopy = _stores;
       }
       setFilteredStores(filteredStoresCopy);
     }
     if (!locationAccess) {
       changeCurrentStore(filteredStoresCopy[0], true, false);
     } else {
-      const hasDefaultStore = !_stores[0].distance;
-      if (hasDefaultStore) {
-        const { defaultStore } = findDefaultStore(_stores);
-        changeCurrentStore(defaultStore, false, false);
-      } else {
-        changeCurrentStore(_stores[0], false, false);
-      }
+      // const hasDefaultStore = !filteredStoresCopy[0].distance;
+      // if (hasDefaultStore) {
+      //   const { defaultStore } = findDefaultStore(filteredStoresCopy);
+      //   changeCurrentStore(defaultStore, false, true);
+      // } else {
+      changeCurrentStore(filteredStoresCopy[0], false, false);
+      // }
     }
   }, [mapFilterObj, _stores]); // eslint-disable-line
 
