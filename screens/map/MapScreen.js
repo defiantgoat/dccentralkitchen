@@ -66,6 +66,7 @@ export default function MapScreen(props) {
           setMapFilterObj(initialMapFilters);
         } else {
           setInitialAsyncStorageMapFilters().then((mapFilters) => {
+            console.log(mapFilters);
             setMapFilterObj(mapFilters);
           });
         }
@@ -105,22 +106,29 @@ export default function MapScreen(props) {
     // check for user default store
     let filteredStoresCopy = _stores;
     if (mapFilterObj) {
-      if (mapFilterObj.wic && !mapFilterObj.couponProgramPartner) {
-        filteredStoresCopy = _stores.filter((store) => store.wic);
-      } else if (mapFilterObj.couponProgramPartner && !mapFilterObj.wic) {
-        filteredStoresCopy = _stores.filter(
-          (store) => store.couponProgramPartner && !store.wic
-        );
-      } else if (mapFilterObj.wic && mapFilterObj.couponProgramPartner) {
-        filteredStoresCopy = _stores.filter(
-          (store) => store.couponProgramPartner && store.wic
-        );
-      }
+      // if (mapFilterObj.wic && !mapFilterObj.couponProgramPartner) {
+      //   filteredStoresCopy = _stores.filter((store) => store.wic);
+      // } else if (mapFilterObj.couponProgramPartner && !mapFilterObj.wic) {
+      //   filteredStoresCopy = _stores.filter(
+      //     (store) => store.couponProgramPartner && !store.wic
+      //   );
+      // } else if (mapFilterObj.wic && mapFilterObj.couponProgramPartner) {
+      //   filteredStoresCopy = _stores.filter(
+      //     (store) => store.couponProgramPartner && store.wic
+      //   );
+      // }
+      filteredStoresCopy = _stores.filter((item) => {
+        const wicPass = item.wic === mapFilterObj.wic || !mapFilterObj.wic;
+        const snapPass =
+          item.snapOrEbtAccepted === mapFilterObj.couponProgramPartner ||
+          !mapFilterObj.couponProgramPartner;
+        return wicPass && snapPass;
+      });
       setFilteredStores(filteredStoresCopy);
     }
     if (!locationAccess) {
       changeCurrentStore(filteredStoresCopy[0], true, false);
-    } 
+    }
   }, [mapFilterObj, _stores]); // eslint-disable-line
 
   useEffect(() => {
