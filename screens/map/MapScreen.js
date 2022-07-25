@@ -73,12 +73,12 @@ export default function MapScreen(props) {
     }, [])
   );
 
-  useEffect(() => {
-    if (props.route.params) {
-      const store = props.route.params.currentStore;
-      changeCurrentStore(store, true, false);
-    }
-  }, [props.route.params]);
+  // useEffect(() => {
+  //   if (props.route.params) {
+  //     const store = props.route.params.currentStore;
+  //     changeCurrentStore(store, true, false);
+  //   }
+  // }, [props.route.params]);
 
   useEffect(() => {
     // sort by distance
@@ -120,15 +120,7 @@ export default function MapScreen(props) {
     }
     if (!locationAccess) {
       changeCurrentStore(filteredStoresCopy[0], true, false);
-    } else {
-      // const hasDefaultStore = !filteredStoresCopy[0].distance;
-      // if (hasDefaultStore) {
-      //   const { defaultStore } = findDefaultStore(filteredStoresCopy);
-      //   changeCurrentStore(defaultStore, false, true);
-      // } else {
-      changeCurrentStore(filteredStoresCopy[0], false, false);
-      // }
-    }
+    } 
   }, [mapFilterObj, _stores]); // eslint-disable-line
 
   useEffect(() => {
@@ -140,8 +132,13 @@ export default function MapScreen(props) {
   }, []); // eslint-disable-line
 
   useEffect(() => {
-    changeCurrentStore(stores[0]);
-  }, [stores]);
+    if (props.route.params) {
+      const store = props.route.params.currentStore;
+      changeCurrentStore(store);
+    } else {
+      changeCurrentStore(stores[0]);
+    }
+  }, [stores, props.route.params]);
 
   // Update the current store and map region.
   // Only expand (reset) the bottom sheet to display products if navigated from StoreList
@@ -162,6 +159,7 @@ export default function MapScreen(props) {
       ...deltas,
     };
     setCurrentStore(store);
+
     if (resetSheet) {
       bottomSheetRef.current.snapTo(1);
     }
