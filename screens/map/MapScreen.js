@@ -150,6 +150,7 @@ export default function MapScreen(props) {
     //   store_name: store.storeName,
     //   products_in_stock: 'productIds' in store ? store.productIds.length : 0,
     // });
+    console.log('changeCurrentStore');
     const newRegion = {
       latitude: store.latitude - deltas.latitudeDelta / 3.5,
       longitude: store.longitude,
@@ -160,8 +161,8 @@ export default function MapScreen(props) {
     if (resetSheet) {
       bottomSheetRef.current.snapTo(1);
     }
-    // if (animate) {
-    // mapRef.current.animateToRegion(newRegion, 1000);
+    // // if (animate) {
+    // console.log(mapRef.current.animateToRegion(newRegion, 1000));
     // setTimeout(() => {
     setRegion(newRegion);
     // }, 1000);
