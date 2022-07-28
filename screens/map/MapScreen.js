@@ -269,23 +269,44 @@ export default function MapScreen(props) {
         initialRegion={region}
         onRegionChangeComplete={(newRegion) => setRegion(newRegion)}>
         {/* Display store markers */}
-        {filteredStores.map((store) => (
-          <Marker
-            key={store.id}
-            coordinate={{
-              latitude: store.latitude,
-              longitude: store.longitude,
-            }}
-            onPress={() => changeCurrentStore(store)}>
-            <StoreMarker
-              showName={region.longitudeDelta < 0.07}
-              storeName={store.storeName ?? ''}
-              focused={currentStore && currentStore.id === store.id}
-              wic={mapFilterObj.wic}
-              couponProgramPartner={mapFilterObj.couponProgramPartner}
-            />
-          </Marker>
-        ))}
+        {filteredStores
+          .filter((store) => currentStore.id !== store.id)
+          .map((store) => (
+            <Marker
+              key={store.id}
+              coordinate={{
+                latitude: store.latitude,
+                longitude: store.longitude,
+              }}
+              onPress={() => changeCurrentStore(store)}>
+              <StoreMarker
+                showName={region.longitudeDelta < 0.07}
+                storeName={store.storeName ?? ''}
+                focused={currentStore && currentStore.id === store.id}
+                wic={mapFilterObj.wic}
+                couponProgramPartner={mapFilterObj.couponProgramPartner}
+              />
+            </Marker>
+          ))}
+        {filteredStores
+          .filter((store) => currentStore && currentStore.id === store.id)
+          .map((store) => (
+            <Marker
+              key={store.id}
+              coordinate={{
+                latitude: store.latitude,
+                longitude: store.longitude,
+              }}
+              onPress={() => changeCurrentStore(store)}>
+              <StoreMarker
+                showName={region.longitudeDelta < 0.07}
+                storeName={store.storeName ?? ''}
+                focused={currentStore && currentStore.id === store.id}
+                wic={mapFilterObj.wic}
+                couponProgramPartner={mapFilterObj.couponProgramPartner}
+              />
+            </Marker>
+          ))}
       </MapView>
       {/* Display bottom sheet.
             snapPoints: Params representing the resting positions of the bottom sheet relative to the bottom of the screen. */}
