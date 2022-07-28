@@ -154,5 +154,5 @@ dist/
 
 # @end expo-cli
 .eslintignore
-ios/*
+# ios/*
 android/*

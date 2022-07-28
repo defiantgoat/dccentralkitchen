@@ -66,20 +66,12 @@ export default function MapScreen(props) {
           setMapFilterObj(initialMapFilters);
         } else {
           setInitialAsyncStorageMapFilters().then((mapFilters) => {
-            console.log(mapFilters);
             setMapFilterObj(mapFilters);
           });
         }
       });
     }, [])
   );
-
-  // useEffect(() => {
-  //   if (props.route.params) {
-  //     const store = props.route.params.currentStore;
-  //     changeCurrentStore(store, true, false);
-  //   }
-  // }, [props.route.params]);
 
   useEffect(() => {
     // sort by distance
@@ -106,17 +98,6 @@ export default function MapScreen(props) {
     // check for user default store
     let filteredStoresCopy = _stores;
     if (mapFilterObj) {
-      // if (mapFilterObj.wic && !mapFilterObj.couponProgramPartner) {
-      //   filteredStoresCopy = _stores.filter((store) => store.wic);
-      // } else if (mapFilterObj.couponProgramPartner && !mapFilterObj.wic) {
-      //   filteredStoresCopy = _stores.filter(
-      //     (store) => store.couponProgramPartner && !store.wic
-      //   );
-      // } else if (mapFilterObj.wic && mapFilterObj.couponProgramPartner) {
-      //   filteredStoresCopy = _stores.filter(
-      //     (store) => store.couponProgramPartner && store.wic
-      //   );
-      // }
       filteredStoresCopy = _stores.filter((item) => {
         const wicPass = item.wic === mapFilterObj.wic || !mapFilterObj.wic;
         const snapPass =
@@ -268,7 +249,7 @@ export default function MapScreen(props) {
         mapType="mutedStandard"
         initialRegion={region}
         onRegionChangeComplete={(newRegion) => setRegion(newRegion)}>
-        {/* Display store markers */}
+        {/* Display Non-focused store markers */}
         {filteredStores
           .filter((store) => currentStore.id !== store.id)
           .map((store) => (
@@ -288,6 +269,7 @@ export default function MapScreen(props) {
               />
             </Marker>
           ))}
+        {/* Display Focused store markers */}
         {filteredStores
           .filter((store) => currentStore && currentStore.id === store.id)
           .map((store) => (

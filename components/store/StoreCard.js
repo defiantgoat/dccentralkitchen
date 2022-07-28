@@ -54,7 +54,7 @@ function StoreCard({ store, storeList }) {
             setFavorite(fav);
           }
         } catch (err) {
-          console.error('[StoreCard] Airtable:', err);
+          // console.error('[StoreCard] Airtable:', err);
           logErrorToSentry({
             screen: 'StoreCard',
             action: 'useFocusEffect',
@@ -72,9 +72,9 @@ function StoreCard({ store, storeList }) {
   );
 
   const favoriteStore = async () => {
-    // Analytics.logEvent('toggle_favorite_store', {
-    //   store_name: storeName,
-    // });
+    Analytics.logEvent('toggle_favorite_store', {
+      store_name: storeName,
+    });
     const updateFavorite = await toggleFavoriteStore(navigation, id);
     if (updateFavorite) {
       setFavorite(!favorite);
