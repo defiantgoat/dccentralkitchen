@@ -3,7 +3,7 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import { useFocusEffect } from '@react-navigation/native';
 import * as Analytics from 'expo-firebase-analytics';
 import PropTypes from 'prop-types';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { ActivityIndicator, PixelRatio, StyleSheet, View } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import BottomSheet from 'reanimated-bottom-sheet';
@@ -22,7 +22,6 @@ import Colors from '../../constants/Colors';
 import { deltas, initialRegion } from '../../constants/Map';
 import { getAsyncCustomerAuth } from '../../lib/authUtils';
 import {
-  findDefaultStore,
   findStoreDistance,
   getAsyncStorageMapFilters,
   setInitialAsyncStorageMapFilters,
@@ -40,6 +39,9 @@ import {
 
 const snapPoints = [185, 325, 488];
 export default function MapScreen(props) {
+  const stores = useStores();
+
+  const [_stores, setStores] = useState();
   const [region, setRegion] = useState(initialRegion);
   const [currentStore, setCurrentStore] = useState(null);
   const [mapFilterObj, setMapFilterObj] = useState();
@@ -48,22 +50,14 @@ export default function MapScreen(props) {
   const storeProducts = useStoreProducts(currentStore);
   const { locationPermissions, currentLocation } = useCurrentLocation();
 
-  // check for stores > update store distances
-  const stores = useStores();
+  const _showDefaultStore =
+    locationPermissions !== 'granted' ||
+    (stores.length > 0 && !stores[0].distance);
 
-  // sort by distance
-  stores.forEach((store) => {
-    const currStore = store;
-    currStore.distance = findStoreDistance(currentLocation, store);
-  });
-  stores.sort((a, b) => sortByDistance(a, b));
+  const [showDefaultStore, setDefaultStore] = useState(_showDefaultStore);
 
   const bottomSheetRef = useRef(null);
   const mapRef = useRef(null);
-
-  const showDefaultStore =
-    locationPermissions !== 'granted' ||
-    (stores.length > 0 && !stores[0].distance);
 
   useFocusEffect(
     useCallback(() => {
@@ -80,64 +74,64 @@ export default function MapScreen(props) {
   );
 
   useEffect(() => {
-    if (props.route.params) {
-      const store = props.route.params.currentStore;
-      changeCurrentStore(store, true, false);
-    }
-  }, [props.route.params]);
+    // sort by distance
+    stores.forEach((store) => {
+      const currStore = store;
+      currStore.distance = findStoreDistance(currentLocation, store);
+    });
+    stores.sort((a, b) => sortByDistance(a, b)); // ! sorted by location here
+    setStores(stores);
+    setDefaultStore(
+      locationPermissions !== 'granted' ||
+        (stores.length > 0 && !stores[0].distance)
+    );
+  }, [stores, locationPermissions]); // eslint-disable-line
 
   useEffect(() => {
     // if default store go to store
     // else go to closest store
-    if (!stores.length) return;
+    if (!_stores || !mapFilterObj) return;
 
     // check for location permissions
     const locationAccess = locationPermissions === 'granted';
 
     // check for user default store
+    let filteredStoresCopy = _stores;
     if (mapFilterObj) {
-      let filteredStoresCopy;
-      if (mapFilterObj.wic && !mapFilterObj.couponProgramPartner) {
-        filteredStoresCopy = stores.filter((store) => store.wic);
-      } else if (mapFilterObj.couponProgramPartner && !mapFilterObj.wic) {
-        filteredStoresCopy = stores.filter(
-          (store) => store.couponProgramPartner && !store.wic
-        );
-      } else if (mapFilterObj.wic && mapFilterObj.couponProgramPartner) {
-        filteredStoresCopy = stores.filter(
-          (store) => store.couponProgramPartner && store.wic
-        );
-      } else {
-        filteredStoresCopy = stores;
-      }
+      filteredStoresCopy = _stores.filter((item) => {
+        const wicPass = item.wic === mapFilterObj.wic || !mapFilterObj.wic;
+        const snapPass =
+          item.snapOrEbtAccepted === mapFilterObj.couponProgramPartner ||
+          !mapFilterObj.couponProgramPartner;
+        return wicPass && snapPass;
+      });
       setFilteredStores(filteredStoresCopy);
+    }
+    if (!locationAccess) {
       changeCurrentStore(filteredStoresCopy[0], true, false);
     }
-    if (!currentStore && locationAccess) {
-      const hasDefaultStore = stores.length > 0 || !stores[0].distance;
-
-      if (hasDefaultStore) {
-        const { defaultStore } = findDefaultStore(stores);
-        changeCurrentStore(defaultStore, false, false);
-      } else {
-        changeCurrentStore(stores[0], true, true);
-      }
-    }
-  }, [mapFilterObj, stores]); // eslint-disable-line
+  }, [mapFilterObj, _stores]); // eslint-disable-line
 
   useEffect(() => {
     const fetchUser = async () => {
-      const customerId = await getAsyncCustomerAuth();
-      if (customerId.showLandingScreen) {
-        props.navigation.navigate('GettingStartedOverlay', { customerId });
-      }
+      await getAsyncCustomerAuth();
     };
 
     fetchUser();
   }, []); // eslint-disable-line
 
+  useEffect(() => {
+    if (props.route.params) {
+      const store = props.route.params.currentStore;
+      changeCurrentStore(store);
+    } else {
+      changeCurrentStore(stores[0]);
+    }
+  }, [stores, props.route.params]);
+
   // Update the current store and map region.
   // Only expand (reset) the bottom sheet to display products if navigated from StoreList
+
   const changeCurrentStore = async (
     store,
     resetSheet = false,
@@ -154,6 +148,7 @@ export default function MapScreen(props) {
       ...deltas,
     };
     setCurrentStore(store);
+
     if (resetSheet) {
       bottomSheetRef.current.snapTo(1);
     }
@@ -163,16 +158,6 @@ export default function MapScreen(props) {
       setRegion(newRegion);
     }
   };
-
-  // Once stores are loaded, set an initial store to focus on
-  if (!currentStore && locationPermissions && stores.length > 0) {
-    if (showDefaultStore) {
-      const { defaultStore } = findDefaultStore(stores);
-      changeCurrentStore(defaultStore, false, false);
-    } else {
-      changeCurrentStore(stores[0], false, false);
-    }
-  }
 
   const renderContent = () => {
     return (
@@ -262,26 +247,48 @@ export default function MapScreen(props) {
         showsUserLocation
         ref={mapRef}
         mapType="mutedStandard"
-        region={region}
+        initialRegion={region}
         onRegionChangeComplete={(newRegion) => setRegion(newRegion)}>
-        {/* Display store markers */}
-        {filteredStores.map((store) => (
-          <Marker
-            key={store.id}
-            coordinate={{
-              latitude: store.latitude,
-              longitude: store.longitude,
-            }}
-            onPress={() => changeCurrentStore(store)}>
-            <StoreMarker
-              showName={region.longitudeDelta < 0.07}
-              storeName={store.storeName}
-              focused={currentStore && currentStore.id === store.id}
-              wic={mapFilterObj.wic}
-              couponProgramPartner={mapFilterObj.couponProgramPartner}
-            />
-          </Marker>
-        ))}
+        {/* Display Non-focused store markers */}
+        {filteredStores
+          .filter((store) => currentStore.id !== store.id)
+          .map((store) => (
+            <Marker
+              key={store.id}
+              coordinate={{
+                latitude: store.latitude,
+                longitude: store.longitude,
+              }}
+              onPress={() => changeCurrentStore(store)}>
+              <StoreMarker
+                showName={region.longitudeDelta < 0.07}
+                storeName={store.storeName ?? ''}
+                focused={currentStore && currentStore.id === store.id}
+                wic={mapFilterObj.wic}
+                couponProgramPartner={mapFilterObj.couponProgramPartner}
+              />
+            </Marker>
+          ))}
+        {/* Display Focused store markers */}
+        {filteredStores
+          .filter((store) => currentStore && currentStore.id === store.id)
+          .map((store) => (
+            <Marker
+              key={store.id}
+              coordinate={{
+                latitude: store.latitude,
+                longitude: store.longitude,
+              }}
+              onPress={() => changeCurrentStore(store)}>
+              <StoreMarker
+                showName={region.longitudeDelta < 0.07}
+                storeName={store.storeName ?? ''}
+                focused={currentStore && currentStore.id === store.id}
+                wic={mapFilterObj.wic}
+                couponProgramPartner={mapFilterObj.couponProgramPartner}
+              />
+            </Marker>
+          ))}
       </MapView>
       {/* Display bottom sheet.
             snapPoints: Params representing the resting positions of the bottom sheet relative to the bottom of the screen. */}

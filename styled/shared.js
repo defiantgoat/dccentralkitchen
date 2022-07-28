@@ -6,6 +6,11 @@ export const RowContainer = styled.View`
 
 export const ColumnContainer = styled.View`
   flex-direction: column;
+  maxWidth: 60%;
+`;
+
+export const CardContainer = styled.View`
+  flex-direction: column;
 `;
 
 export const InLineContainer = styled.View`

@@ -20,7 +20,7 @@ import { env } from '../environment';
 import { getCustomerById } from '../lib/airtable/request';
 import { completeLogout, getAsyncCustomerAuth } from '../lib/authUtils';
 import { clearUserLog, logErrorToSentry, setUserLog } from '../lib/logUtils';
-import { ColumnContainer, SpaceBetweenRowContainer } from '../styled/shared';
+import { CardContainer, SpaceBetweenRowContainer } from '../styled/shared';
 
 function DrawerContent(props) {
   const [customer, setCustomer] = React.useState(null);
@@ -116,33 +116,34 @@ function DrawerContent(props) {
           padding: 24,
           marginBottom: 24,
         }}>
-        <ColumnContainer style={{ marginTop: 32, width: '100%' }}>
+        <CardContainer style={{ marginTop: 32, width: '100%' }}>
           <SpaceBetweenRowContainer
             style={{ alignItems: 'center', marginBottom: 4, width: '100%' }}>
             <BigTitle style={{ color: Colors.lightText }}>
               {customer.name}
             </BigTitle>
-            {isGuest && (
-              <FilledButtonContainer
-                style={{
-                  borderColor: Colors.lightText,
-                  borderWidth: 1,
-                  height: 30,
-                  width: 80,
-                  marginVertical: 8,
-                  marginRight: 8,
-                }}
-                color={Colors.bgLight}
-                onPress={() => logout()}>
-                {logoutIsLoading ? (
-                  <ActivityIndicator />
-                ) : (
-                  <ButtonLabel noCaps>Log In</ButtonLabel>
-                )}
-              </FilledButtonContainer>
-            )}
+
+            <FilledButtonContainer
+              style={{
+                borderColor: Colors.lightText,
+                borderWidth: 1,
+                height: 30,
+                width: 80,
+                marginVertical: 8,
+                marginRight: 8,
+              }}
+              color={Colors.bgLight}
+              onPress={() => logout()}>
+              {logoutIsLoading ? (
+                <ActivityIndicator />
+              ) : (
+                <ButtonLabel noCaps>
+                  {isGuest ? 'Log In' : 'Log Out'}
+                </ButtonLabel>
+              )}
+            </FilledButtonContainer>
           </SpaceBetweenRowContainer>
-        </ColumnContainer>
+        </CardContainer>
       </View>
       <DrawerItemList {...props} />
       <View

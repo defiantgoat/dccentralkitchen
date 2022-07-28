@@ -23,7 +23,7 @@ import {
   OnboardingContentContainer,
   styles,
 } from '../../styled/auth';
-import { ColumnContainer } from '../../styled/shared';
+import { CardContainer } from '../../styled/shared';
 
 export default class OnboardingScreen extends React.Component {
   constructor(props) {
@@ -68,15 +68,15 @@ export default class OnboardingScreen extends React.Component {
             margin: 0,
           }}
         />
-        <ColumnContainer>
+        <CardContainer>
           <Title style={{ textAlign: 'center' }}>{item.title}</Title>
           <Body style={{ marginTop: 12, textAlign: 'center' }}>
             {item.body}
           </Body>
-        </ColumnContainer>
+        </CardContainer>
         {/* Display login/get started buttons */}
         {index === 3 && (
-          <ColumnContainer style={{ marginTop: 12 }}>
+          <CardContainer style={{ marginTop: 12 }}>
             <FilledButtonContainer
               width="100%"
               onPress={() => this.navigateAuth()}>
@@ -89,7 +89,7 @@ export default class OnboardingScreen extends React.Component {
                 Continue as guest
               </ButtonLabel>
             </ButtonContainer>
-          </ColumnContainer>
+          </CardContainer>
         )}
       </OnboardingContentContainer>
     );

@@ -34,11 +34,12 @@ function StoreMarker({
   }
 
   return (
-    <MarkerContainer>
+    <MarkerContainer style={{ zIndex: focused ? 1000 : 100 }}>
       <Image
         style={{
           width: imageSize,
           height: imageSize,
+          zIndex: focused ? 1000 : 100,
         }}
         source={imageSource}
       />
@@ -49,8 +50,13 @@ function StoreMarker({
             backgroundColor: 'rgba(255, 255, 255, 0.7)',
             paddingHorizontal: 6,
             borderRadius: 8,
+            zIndex: focused ? 1000 : 100,
           }}>
-          <MarkerStoreName focused={focused}>{storeName}</MarkerStoreName>
+          <MarkerStoreName
+            style={{ zIndex: focused ? 1000 : 100 }}
+            focused={focused}>
+            {storeName}
+          </MarkerStoreName>
         </View>
       )}
     </MarkerContainer>

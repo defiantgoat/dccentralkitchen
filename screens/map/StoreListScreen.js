@@ -16,7 +16,7 @@ import Colors from '../../constants/Colors';
 import { INITIAL_FILTER_STATE } from '../../constants/Map';
 
 import { useFilteredStores } from '../../lib/mapUtils';
-import { ColumnContainer, RowContainer } from '../../styled/shared';
+import { CardContainer, RowContainer } from '../../styled/shared';
 import { CancelButton, styles } from '../../styled/store';
 
 export default function StoreListScreen(props) {
@@ -49,7 +49,7 @@ export default function StoreListScreen(props) {
   return (
     <View>
       <NavHeaderContainer vertical backgroundColor={Colors.primaryOrange}>
-        <ColumnContainer style={{ width: '100%' }}>
+        <CardContainer style={{ width: '100%' }}>
           <RowContainer
             style={{
               width: '100%',
@@ -84,7 +84,7 @@ export default function StoreListScreen(props) {
             inputStyle={styles.input}
             ref={searchRef}
           />
-        </ColumnContainer>
+        </CardContainer>
       </NavHeaderContainer>
       <ScrollView
         horizontal

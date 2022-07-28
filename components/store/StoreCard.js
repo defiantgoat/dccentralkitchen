@@ -159,7 +159,7 @@ function StoreCard({ store, storeList }) {
               marginTop: 6,
             }}>
             {snapOrEbtAccepted && <ProgramTag program="SNAP/EBT" />}
-            {wic && <ProgramTag program="WIC" />}
+            {wic && <ProgramTag program="DC WIC" />}
             {couponProgramPartner && <ProgramTag program="SNAP Match" />}
             {rewardsAccepted && <ProgramTag program="Healthy Rewards" />}
           </InLineContainer>

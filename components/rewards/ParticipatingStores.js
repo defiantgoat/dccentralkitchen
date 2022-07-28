@@ -2,13 +2,13 @@ import { useNavigation } from '@react-navigation/native';
 import * as Analytics from 'expo-firebase-analytics';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { ColumnContainer } from '../../styled/shared';
+import { CardContainer } from '../../styled/shared';
 import { ButtonContainer, Overline, Subtitle } from '../BaseComponents';
 
 export default function ParticipatingStores({ participating, guest }) {
   const navigation = useNavigation();
   return (
-    <ColumnContainer
+    <CardContainer
       style={
         guest
           ? { marginLeft: 16, marginBottom: 40, marginTop: 28 }
@@ -34,7 +34,7 @@ export default function ParticipatingStores({ participating, guest }) {
         );
       })}
       <Subtitle style={{ marginLeft: 12 }}>More stores coming soon!</Subtitle>
-    </ColumnContainer>
+    </CardContainer>
   );
 }
 

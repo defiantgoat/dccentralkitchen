@@ -23,7 +23,7 @@ import {
   useFilteredStores,
   useStores,
 } from '../../lib/mapUtils';
-import { ColumnContainer, RowContainer } from '../../styled/shared';
+import { CardContainer, RowContainer } from '../../styled/shared';
 import { styles } from '../../styled/store';
 
 export default function StoreSelectScreen(props) {
@@ -103,7 +103,7 @@ export default function StoreSelectScreen(props) {
     !isLoading && (
       <View style={{ flex: 1 }}>
         <NavHeaderContainer vertical backgroundColor={Colors.bgLight}>
-          <ColumnContainer
+          <CardContainer
             style={{
               width: '100%',
               paddingHorizontal: 8,
@@ -139,7 +139,7 @@ export default function StoreSelectScreen(props) {
               inputStyle={styles.input}
               ref={searchRef}
             />
-          </ColumnContainer>
+          </CardContainer>
         </NavHeaderContainer>
         <FlatList
           data={filteredStores}

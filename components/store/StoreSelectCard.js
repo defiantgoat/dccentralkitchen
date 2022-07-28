@@ -7,7 +7,7 @@ import Colors from '../../constants/Colors';
 import Window from '../../constants/Layout';
 import { getMaxWidth } from '../../lib/mapUtils';
 import {
-  ColumnContainer,
+  CardContainer,
   InLineContainer,
   RowContainer,
   SpaceBetweenRowContainer,
@@ -69,11 +69,11 @@ function StoreSelectCard({ store, selectStore, favorited }) {
               <Feather name="info" size={24} color={Colors.secondaryText} />
             </ButtonContainer>
           </SpaceBetweenRowContainer>
-          <ColumnContainer>
+          <CardContainer>
             <InLineContainer style={{ alignItems: 'center' }}>
               <Body>{address}</Body>
             </InLineContainer>
-          </ColumnContainer>
+          </CardContainer>
           <DividerBar />
         </StoreCardContainer>
       </RowContainer>

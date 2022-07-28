@@ -18,7 +18,7 @@ import {
 } from '../../lib/authUtils';
 import { logErrorToSentry } from '../../lib/logUtils';
 import { PermissionsContainer } from '../../styled/auth';
-import { ColumnContainer } from '../../styled/shared';
+import { CardContainer } from '../../styled/shared';
 
 export default function PermissionsScreen(props) {
   const [step, setStep] = useState(1);
@@ -37,10 +37,6 @@ export default function PermissionsScreen(props) {
         customerId.id,
         'Healthy Corners: Thank you for joining Healthy Corners notifications. Reply STOP to unsubscribe.'
       );
-
-      // console.log(
-      //   response ? '[sendTextMessage] Success' : '[sendTextMessage] Failed'
-      // );
       navigateMapScreen();
     } catch (err) {
       logErrorToSentry({
@@ -91,7 +87,7 @@ export default function PermissionsScreen(props) {
             : 'Get notifications when your store gets new deliveries'}
         </Subtitle>
         {/* Display login/get started buttons */}
-        <ColumnContainer style={{ marginTop: 40 }} width="100%">
+        <CardContainer style={{ marginTop: 40 }} width="100%">
           <FilledButtonContainer
             color={Colors.primaryGreen}
             onPress={() =>
@@ -106,7 +102,7 @@ export default function PermissionsScreen(props) {
             onPress={() => (step === 1 ? setStep(2) : navigateMapScreen())}>
             <ButtonLabel color={Colors.primaryGreen}>Not now</ButtonLabel>
           </OutlinedButtonContainer>
-        </ColumnContainer>
+        </CardContainer>
       </View>
     </PermissionsContainer>
   );

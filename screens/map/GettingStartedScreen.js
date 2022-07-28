@@ -1,51 +1,38 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { FontAwesome5 } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
-import { Checkbox } from 'react-native-paper';
-import iconTrans from '../../assets/images/icon_trans.png';
-import {
-  ButtonLabel,
-  FilledButtonContainer,
-  NavHeaderContainer,
-  Subtitle,
-  Title,
-} from '../../components/BaseComponents';
-import Colors from '../../constants/Colors';
+import { Image, View } from 'react-native';
+import { Text } from 'react-native-elements';
+import bannerLogo from '../../assets/images/banner_logo.png';
+import { NavHeaderContainer } from '../../components/BaseComponents';
 import Window from '../../constants/Layout';
-import { HowItWorksContainer } from '../../styled/rewards';
+import {
+  HowItWorksButton,
+  HowItWorksView,
+  RewardButtonSubtitle,
+  RewardButtonTitle,
+} from '../../styled/rewards';
 import { ColumnContainer } from '../../styled/shared';
-import { DragBar } from '../../styled/store';
 
-export default function GettingStartedScreen({ route, navigation }) {
-  const [checked, setChecked] = React.useState(false);
-  const { customerId } = route.params;
-
-  async function handleCheckbox() {
-    setChecked(!checked);
-    const customerObj = {
-      id: customerId.id,
-      showLandingScreen: checked,
-    };
-    const jsonValue = JSON.stringify(customerObj);
-    await AsyncStorage.setItem('customerId', jsonValue);
-  }
+export default function GettingStartedScreen({ navigation }) {
+  const buttonNavigation = (screenId) => {
+    navigation.navigate(screenId);
+  };
 
   return (
     <View
       style={{
         flex: 1,
+        paddingTop: 60,
       }}>
       <NavHeaderContainer
-        vertical
         noShadow
         paddingTop={0}
         alignItems="center"
         justifyContent="space-between"
         height={Window.height * (12 / 100)}>
-        <DragBar style={{ backgroundColor: 'black' }} />
         <Image
-          source={iconTrans}
+          source={bannerLogo}
           resizeMode="contain"
           style={{
             height: '100%',
@@ -59,112 +46,106 @@ export default function GettingStartedScreen({ route, navigation }) {
           justifyContent: 'space-between',
           alignItems: 'center',
           padding: '2%',
-          height: Window.height * (75 / 100),
+          height: Window.height * (69 / 100),
         }}>
+        <HowItWorksView onPress={() => navigation.navigate('Stores')}>
+          <Text
+            style={{
+              fontSize: 18,
+              height: '100%',
+              width: '100%',
+              paddingRight: '5%',
+              paddingLeft: '5%',
+              textAlign: 'center',
+              color: 'black',
+            }}>
+            DC Central Kitchen partners with corner stores across D.C. to bring
+            affordable, fresh produce close to home
+          </Text>
+        </HowItWorksView>
         <View>
-          <HowItWorksContainer>
+          <HowItWorksButton onPress={() => buttonNavigation('Stores')}>
             <Image
-              source={require('../../assets/images/Onboarding_2.png')}
+              source={require('../../assets/images/Carrot_White.png')}
               style={{
-                maxWidth: '40%',
+                maxWidth: '30%',
+                marginRight: 8,
                 resizeMode: 'contain',
-                height: 140,
-                marginRight: 12,
+                height: 100,
               }}
             />
             <ColumnContainer style={{ flex: 1 }}>
-              <Title>Find Stores Near You</Title>
-              <Subtitle>
-                Explore the map to discover nearby stores stocking healthy
-                fruits and vegetables
-              </Subtitle>
+              <RewardButtonTitle>Find Stores Near You</RewardButtonTitle>
+              <RewardButtonSubtitle>
+                Explore the map to find nearby stores stocking healthy fruits
+                and vegetables
+              </RewardButtonSubtitle>
             </ColumnContainer>
-          </HowItWorksContainer>
+            <FontAwesome5
+              style={{ marginRight: 30 }}
+              name="arrow-right"
+              solid
+              size={25}
+              color="white"
+            />
+          </HowItWorksButton>
 
-          <HowItWorksContainer>
+          <HowItWorksButton onPress={() => buttonNavigation('Recipes')}>
             <Image
-              source={require('../../assets/images/Onboarding_3.png')}
+              source={require('../../assets/images/Groceries_White.png')}
               style={{
-                maxWidth: '40%',
+                maxWidth: '30%',
+                marginRight: 8,
                 resizeMode: 'contain',
-                height: 140,
-                marginRight: 12,
+                height: 100,
               }}
             />
             <ColumnContainer style={{ flex: 1 }}>
-              <Title>Know What&apos;s In Stock</Title>
-              <Subtitle>
-                See what products are available before you leave the house
-              </Subtitle>
+              <RewardButtonTitle>Browse Recipes</RewardButtonTitle>
+              <RewardButtonSubtitle>
+                Search for your favorite delicious Healthy Corners recipes
+              </RewardButtonSubtitle>
             </ColumnContainer>
-          </HowItWorksContainer>
+            <FontAwesome5
+              style={{ marginRight: 30 }}
+              name="arrow-right"
+              solid
+              size={25}
+              color="white"
+            />
+          </HowItWorksButton>
 
-          <HowItWorksContainer>
+          <HowItWorksButton onPress={() => buttonNavigation('Resources')}>
             <Image
-              source={require('../../assets/images/Onboarding_5.png')}
+              source={require('../../assets/images/Stay_Informed_White.png')}
               style={{
-                maxWidth: '40%',
+                maxWidth: '30%',
+                marginRight: 8,
                 resizeMode: 'contain',
-                height: 140,
-                marginRight: 12,
+                height: 100,
               }}
             />
             <ColumnContainer style={{ flex: 1 }}>
-              <Title>Stay Informed</Title>
-              <Subtitle>
+              <RewardButtonTitle>Stay Informed</RewardButtonTitle>
+              <RewardButtonSubtitle>
                 Connect with resources to access benefits and tools for healthy
-                living.
-              </Subtitle>
+                living
+              </RewardButtonSubtitle>
             </ColumnContainer>
-          </HowItWorksContainer>
-          <HowItWorksContainer>
-            <Text
-              style={{
-                height: '100%',
-                width: '100%',
-                paddingRight: '10%',
-                paddingLeft: '10%',
-                textAlign: 'center',
-                color: 'black',
-              }}>
-              DC Central Kitchen partners with corner stores across D.C. to
-              bring affordable, fresh produce close to home.
-            </Text>
-          </HowItWorksContainer>
+            <FontAwesome5
+              style={{ marginRight: 30 }}
+              name="arrow-right"
+              solid
+              size={25}
+              color="white"
+            />
+          </HowItWorksButton>
         </View>
-        <View style={styles.checkboxContainer}>
-          <Checkbox.Android
-            status={checked ? 'checked' : 'unchecked'}
-            // eslint-disable-next-line
-            onPress={handleCheckbox}
-            color={Colors.primaryGreen}
-          />
-          <Text style={styles.label}>Do not show again</Text>
-        </View>
-
-        <FilledButtonContainer
-          width="90%"
-          onPress={() => {
-            navigation.navigate('Stores');
-          }}>
-          <ButtonLabel color="white">Continue To App</ButtonLabel>
-        </FilledButtonContainer>
       </View>
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  checkboxContainer: {
-    flexDirection: 'row',
-  },
-
-  label: {
-    margin: 8,
-  },
-});
-
 GettingStartedScreen.propTypes = {
-  route: PropTypes.object.isRequired,
   navigation: PropTypes.object.isRequired,
 };

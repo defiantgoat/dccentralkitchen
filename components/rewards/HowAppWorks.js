@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image, ScrollView, View } from 'react-native';
-import { HowItWorksContainer } from '../../styled/rewards';
-import { ColumnContainer } from '../../styled/shared';
+import { HowItWorksView } from '../../styled/rewards';
+import { CardContainer } from '../../styled/shared';
 import { Subtitle, Title } from '../BaseComponents';
 import RewardsFAQ from './RewardsFAQ';
 /**
@@ -18,7 +18,7 @@ function HowAppWorks() {
           paddingRight: 16,
           paddingTop: 24,
         }}>
-        <HowItWorksContainer>
+        <HowItWorksView>
           <Image
             source={require('../../assets/images/Onboarding_2.png')}
             style={{
@@ -28,16 +28,16 @@ function HowAppWorks() {
               marginRight: 12,
             }}
           />
-          <ColumnContainer style={{ flex: 1 }}>
+          <CardContainer style={{ flex: 1 }}>
             <Title>Find Stores Near You</Title>
             <Subtitle>
-              Explore the map to discover nearby stores stocking healthy fruits
-              and vegetables
+              Explore the map to find nearby stores stocking healthy fruits and
+              vegetables
             </Subtitle>
-          </ColumnContainer>
-        </HowItWorksContainer>
+          </CardContainer>
+        </HowItWorksView>
 
-        <HowItWorksContainer>
+        <HowItWorksView>
           <Image
             source={require('../../assets/images/Onboarding_3.png')}
             style={{
@@ -47,15 +47,15 @@ function HowAppWorks() {
               marginRight: 12,
             }}
           />
-          <ColumnContainer style={{ flex: 1 }}>
-            <Title>Know What&apos;s In Stock</Title>
+          <CardContainer style={{ flex: 1 }}>
+            <Title>Browse Recipes</Title>
             <Subtitle>
-              See what products are available when you leave the house
+              Search for your favorite delicious Healthy Corners recipes
             </Subtitle>
-          </ColumnContainer>
-        </HowItWorksContainer>
+          </CardContainer>
+        </HowItWorksView>
 
-        <HowItWorksContainer>
+        <HowItWorksView>
           <Image
             source={require('../../assets/images/Onboarding_5.png')}
             style={{
@@ -65,14 +65,15 @@ function HowAppWorks() {
               marginRight: 12,
             }}
           />
-          <ColumnContainer style={{ flex: 1 }}>
+
+          <CardContainer style={{ flex: 1 }}>
             <Title>Stay Informed</Title>
             <Subtitle>
               Access our resource database to help you continue eating and
-              living healthy.
+              living healthy
             </Subtitle>
-          </ColumnContainer>
-        </HowItWorksContainer>
+          </CardContainer>
+        </HowItWorksView>
       </View>
 
       <RewardsFAQ />
