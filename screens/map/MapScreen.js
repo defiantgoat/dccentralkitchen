@@ -173,7 +173,7 @@ export default function MapScreen(props) {
                 Analytics.logEvent('center_location', {
                   purpose: 'Centers map to current location',
                 });
-                setRegion(currentLocation);
+                await mapRef.current.animateToRegion(currentLocation, 1000);
               }}
             />
           )}
