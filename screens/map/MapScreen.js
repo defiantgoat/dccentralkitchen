@@ -101,7 +101,7 @@ export default function MapScreen(props) {
       filteredStoresCopy = _stores.filter((item) => {
         const wicPass = item.wic === mapFilterObj.wic || !mapFilterObj.wic;
         const snapPass =
-          item.snapOrEbtAccepted === mapFilterObj.couponProgramPartner ||
+          item.couponProgramPartner === mapFilterObj.couponProgramPartner ||
           !mapFilterObj.couponProgramPartner;
         return wicPass && snapPass;
       });
