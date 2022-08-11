@@ -5,13 +5,14 @@ import * as Analytics from 'expo-firebase-analytics';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Image } from 'react-native';
+import { Text } from 'react-native-elements';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import {
   Body,
   ButtonContainer,
   ButtonLabel,
   FilledButtonContainer,
-  Title,
+  Title
 } from '../../components/BaseComponents';
 import Colors from '../../constants/Colors';
 import Window from '../../constants/Layout';
@@ -21,7 +22,7 @@ import { setAsyncCustomerAuth } from '../../lib/authUtils';
 import {
   OnboardingContainer,
   OnboardingContentContainer,
-  styles,
+  styles
 } from '../../styled/auth';
 import { CardContainer } from '../../styled/shared';
 
@@ -33,6 +34,8 @@ export default class OnboardingScreen extends React.Component {
       loading: true,
       pageIndex: 0,
     };
+    this.setState = this.setState.bind(this);
+    this.state = this.setState.bind(this);
   }
 
   componentDidMount() {
@@ -73,6 +76,9 @@ export default class OnboardingScreen extends React.Component {
           <Body style={{ marginTop: 12, textAlign: 'center' }}>
             {item.body}
           </Body>
+          <ButtonContainer onPress={this.nextPage}>
+            <Text>Next</Text>
+          </ButtonContainer>
         </CardContainer>
         {/* Display login/get started buttons */}
         {index === 3 && (
@@ -111,6 +117,13 @@ export default class OnboardingScreen extends React.Component {
     this.props.navigation.navigate('PhoneNumber');
   }
 
+  nextPage() {
+    // this.setState((prev) => ({
+    //   pageIndex: prev.pageIndex + 1,
+    // }));
+    console.log(this.state);
+  }
+
   render() {
     if (this.state.loading) {
       return null;
@@ -119,10 +132,9 @@ export default class OnboardingScreen extends React.Component {
       <OnboardingContainer>
         {/* Display sliding content: 80 = 2 * 40px for marginWidth
         containerCustomStyle height: 337 to bound the size of carousel
-        */}
+      */}
         <Carousel
           data={ONBOARDING_CONTENT}
-          useScrollView
           ref={(c) => {
             this._carousel = c;
           }}

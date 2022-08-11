@@ -8,7 +8,7 @@
       "android",
       "web"
     ],
-    "version": "1.6.12",
+    "version": "1.6.13",
     "primaryColor": "#008550",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",

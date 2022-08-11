@@ -1,7 +1,7 @@
 {
   "scripts": {
     "start": "expo start --dev-client",
-    "android": "expo run:android",
+    "android": "expo start --android",
     "build-prod-ios": "NODE_ENV=production expo build:ios --release-channel prod",
     "build-prod-ota": "NODE_ENV=production expo publish --release-channel prod",
     "build-prod-android": "NODE_ENV=production expo build:android --release-channel prod",
