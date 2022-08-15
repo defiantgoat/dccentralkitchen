@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "postinstall": "npx jetify",
     "start": "expo start --dev-client",
     "android": "expo run:android",
     "build-prod-ios": "NODE_ENV=production expo build:ios --release-channel prod",
